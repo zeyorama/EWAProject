@@ -1,46 +1,63 @@
+CREATE DATABASE IF NOT EXISTS ewaproject;
+USE ewaproject;
 CREATE TABLE _user (
-id int NOT NULL AUTO_INCREMENT,
-email varchar(80) NOT NULL,
-pass varchar(32) NOT NULL,
-role int NOT NULL,
+user_id int NOT NULL AUTO_INCREMENT,
+nick varchar(25) NOT NULL,
+email varchar(255) NOT NULL,
+pass varchar(64) NOT NULL,
+admin boolean NOT NULL,
+created_at datetime,
+last_signin datetime,
+session_id varchar(64),
 locked int NOT NULL,
-PRIMARY KEY (id),
-UNIQUE (email)
+PRIMARY KEY (user_id),
+UNIQUE (email, nick)
+);
+CREATE TABLE _knowing (
+knowing_id int NOT NULL AUTO_INCREMENT,
+user_id1 int NOT NULL,
+user_id2 int NOT NULL,
+PRIMARY KEY (knowing_id)
 );
 CREATE TABLE _event (
-id int NOT NULL AUTO_INCREMENT,
+event_id int NOT NULL AUTO_INCREMENT,
 startDate TimeStamp,
-location varchar(255),
+location text,
 description text,
 owner_user_id int,
-PRIMARY KEY (id)
+locked boolean,
+PRIMARY KEY (event_id)
 );
 CREATE TABLE _video (
-id int NOT NULL AUTO_INCREMENT,
-name varchar(50),
-duration int,
+video_id int NOT NULL AUTO_INCREMENT,
+title varchar(255),
+duration smallint,
 genre_id int,
-PRIMARY KEY (id)
+FSK tinyint,
+release_year year,
+PRIMARY KEY (video_id)
 );
 CREATE TABLE _genre (
-id int NOT NULL AUTO_INCREMENT,
-name varchar(25),
-PRIMARY KEY (id)
+genre_id int NOT NULL AUTO_INCREMENT,
+name varchar(128),
+PRIMARY KEY (genre_id)
 );
 CREATE TABLE _user_video (
-id int NOT NULL AUTO_INCREMENT,
+uv_id int NOT NULL AUTO_INCREMENT,
 user_id int NOT NULL,
 video_id int NOT NULL,
-PRIMARY KEY (id)
+shared_to int,
+PRIMARY KEY (uv_id)
 );
 CREATE TABLE _user_event (
-id int NOT NULL AUTO_INCREMENT,
+ue_id int NOT NULL AUTO_INCREMENT,
 user_id int NOT NULL,
 event_id int NOT NULL,
-PRIMARY KEY (id)
+PRIMARY KEY (ue_id)
 );
 CREATE TABLE _event_video (
-_ue_id int NOT NULL,
+ev_id int NOT NULL AUTO_INCREMENT,
+ue_id int NOT NULL,
 video_id int NOT NULL,
-PRIMARY KEY (_ue_id, video_id)
+PRIMARY KEY (ev_id)
 );
