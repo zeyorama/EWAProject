@@ -6,3 +6,4 @@ DELETE FROM _event_video;
 DELETE FROM _genre;
 DELETE FROM _user_video;
 DELETE FROM _knowing;
+DELETE FROM _pn;

@@ -1,5 +1,13 @@
-CREATE DATABASE IF NOT EXISTS ewaproject;
+CREATE USER 'ewaproject'@'localhost' IDENTIFIED BY 'ewa_pass';
+
+GRANT USAGE ON * . * TO 'ewaproject'@'localhost' IDENTIFIED BY 'ewa_pass' WITH MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0 ;
+
+CREATE DATABASE IF NOT EXISTS `ewaproject` ;
+
+GRANT ALL PRIVILEGES ON `ewaproject` . * TO 'ewaproject'@'localhost';
+
 USE ewaproject;
+
 CREATE TABLE _user (
 user_id int NOT NULL AUTO_INCREMENT,
 nick varchar(25) NOT NULL,
@@ -13,12 +21,14 @@ locked int NOT NULL,
 PRIMARY KEY (user_id),
 UNIQUE (email, nick)
 );
+
 CREATE TABLE _knowing (
 knowing_id int NOT NULL AUTO_INCREMENT,
 user_id1 int NOT NULL,
 user_id2 int NOT NULL,
 PRIMARY KEY (knowing_id)
 );
+
 CREATE TABLE _event (
 event_id int NOT NULL AUTO_INCREMENT,
 startDate TimeStamp,
@@ -28,6 +38,7 @@ owner_user_id int,
 locked boolean,
 PRIMARY KEY (event_id)
 );
+
 CREATE TABLE _video (
 video_id int NOT NULL AUTO_INCREMENT,
 title varchar(255),
@@ -37,11 +48,13 @@ FSK tinyint,
 release_year year,
 PRIMARY KEY (video_id)
 );
+
 CREATE TABLE _genre (
 genre_id int NOT NULL AUTO_INCREMENT,
 name varchar(128),
 PRIMARY KEY (genre_id)
 );
+
 CREATE TABLE _user_video (
 uv_id int NOT NULL AUTO_INCREMENT,
 user_id int NOT NULL,
@@ -49,15 +62,27 @@ video_id int NOT NULL,
 shared_to int,
 PRIMARY KEY (uv_id)
 );
+
 CREATE TABLE _user_event (
 ue_id int NOT NULL AUTO_INCREMENT,
 user_id int NOT NULL,
 event_id int NOT NULL,
 PRIMARY KEY (ue_id)
 );
+
 CREATE TABLE _event_video (
 ev_id int NOT NULL AUTO_INCREMENT,
 ue_id int NOT NULL,
 video_id int NOT NULL,
 PRIMARY KEY (ev_id)
+);
+
+CREATE TABLE _pn (
+pn_id int NOT NULL AUTO_INCREMENT,
+subject varchar(128),
+content text,
+sendDate datetime NOT NULL,
+from_user int NOT NULL,
+to_user int NOT NULL,
+PRIMARY KEY (pn_id)
 );
