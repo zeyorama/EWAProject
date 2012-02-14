@@ -1,17 +1,23 @@
 <?php
 
 /**
- * Database interface, need mysqli object
+ * Database interface for Singleton, need mysqli object
  * @author Markus Benjamin Kretsch, Frank Kevin Zey
  */
 interface i_db {
+	
+	/**
+	 * Function to return the only instance of the database object
+	 * @return Database object
+	 */
+	static function instance();
 
 	/**
 	 * Etablish connection to MySQL Server
 	 * @param user - username for authentication
 	 * @param pass - password for authentication
 	 * @param schema - name of database
-	 * @return mysqli data object, returns null when an error occured
+   * @throws could raise any Exceptions
 	 */
   public function connect($user, $pass, $schema);
   
