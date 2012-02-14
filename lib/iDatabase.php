@@ -10,7 +10,7 @@ interface i_db {
 	 * Function to return the only instance of the database object
 	 * @return Database object
 	 */
-	static function instance();
+	public static function instance();
 
 	/**
 	 * Etablish connection to MySQL Server
@@ -30,14 +30,15 @@ interface i_db {
   /**
    * Executes a given query and get a result object
    * @param query - query to execute
+   * @param type: type of result object
    */
-  public function query($query);
+  public function query($query, $type);
   
   /**
    * Send query to MySQL Server to prepare
    * @param query - query to prepare
    */
-  public function perpare($query);
+  public function prepare($query);
   
   /**
    * Bind parameters to perpared query and execute them
@@ -46,11 +47,11 @@ interface i_db {
   public function exe_prepare();
   
   /**
-   * Generates array of object from specified query
-   * @return returns array of result objects, returns null, when no query executed
-   * @throws could raise any Exceptions
+   * Bind parameters to perpared query and execute them
+   * @param $type: Objecttype which should return
+   * @return $type object - NULL wenn keins mehr vorhanden
    */
-  public function result();
+  public function get_next_result($type);
   
 }
 

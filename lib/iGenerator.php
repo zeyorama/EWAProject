@@ -10,7 +10,7 @@ interface i_gen {
 	 * Function to return the only instance of the Generator object
 	 * @return Generator object
 	 */
-	static function instance();
+	public static function instance();
 	
 	/**
 	 * Function to print the HTML content based on the variables

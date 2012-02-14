@@ -1,5 +1,7 @@
 <?php
+
 	include_once 'lib/iGenerator.php';
+	
 	final class Generator implements i_gen {
 		private static $instance = NULL;
 		
@@ -41,6 +43,8 @@
 		*/
 		public function print_html() {
 			echo "
+			<meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\" />
+			<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">
 			<html>
 				<head>
 					<title>

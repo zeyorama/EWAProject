@@ -1,27 +1,32 @@
 <?php
+
 	include_once 'iDatabase.php';
-	class Database implements i_db {
+	include_once 'lib/cGenre.php';
+	
+	final class Database implements i_db {
+		private static $instance = NULL;
 		
-		static private $instance = false;
-		private $connection;
+		private $connection = NULL;
+		private $prep = NULL;
+		private $result = NULL;
 		
 		private function __construct() {}
 		
 		/* (non-Javadoc)
 		 * @see i_db#instance
 		*/
-		static function instance() {
-			if(!Database::$instance) {
-				Database::$instance = new Database();
+		public static function instance() {
+			if(self::$instance === NULL) {
+				self::$instance = new self;
 			}
-			return Database::$instance;
+			return self::$instance;
 		}
 		
 		/* (non-Javadoc)
 		 * @see i_db#connect
 		 */
 		public function connect($user, $pass, $schema) {
-			$connection = new mysqli('localhost', $user, $pass, $schema);
+			$this->connection = new mysqli('localhost', $user, $pass, $schema);
 		}
 		
 		
@@ -29,23 +34,24 @@
 		 * @see i_db#close
 		 */
 		public function close() {
-			$connection->close();
+			$this->connection->close();
 		}
 		
 		
 		/* (non-Javadoc)
 		 * @see i_db#query
 		 */
-		public function query($query) {
+		public function query($query, $type) {
+			$this->result = $this->connection->query($query);
 			
 		}
 		
 		
 		/* (non-Javadoc)
-		 * @see i_db#perpare
+		 * @see i_db#prepare
 		 */
-		public function perpare($query) {
-			
+		public function prepare($query) {
+			$this->prep = $this->connection->prepare($query);
 		}
 		
 		
@@ -54,14 +60,18 @@
 		 */
 		public function exe_prepare() {
 			
+			if(func_num_args() != 0) {
+				$this->prep->bind_param(func_get_args());
+			}
+			
+			$this->prep->execute();
+			
+			$this->result = $this->prep->get_result();
+				
 		}
 		
-		
-		/* (non-Javadoc)
-		 * @see i_db#result
-		 */
-		public function result() {
-			
+		public function get_next_result($type) {
+			return $this->result->fetch_object($type);
 		}
 	}
 ?>
