@@ -1,6 +1,6 @@
 <?php 
 
-public interface i_video {
+interface i_video {
 	
 	/**
 	 * @return int - returns the release year of this video as integer

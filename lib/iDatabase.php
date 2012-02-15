@@ -53,6 +53,12 @@ interface i_db {
    */
   public function get_next_result($type);
   
+  /**
+   * Returns the row number for iterating
+   * @return Int: Rownum of $result
+   */
+  public function get_length();
+  
 }
 
 ?>

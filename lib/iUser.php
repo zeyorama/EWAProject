@@ -1,6 +1,6 @@
 <?php 
 
-public interface i_user {
+interface i_user {
 	
 	/**
 	 * Gives all videos from this user
@@ -31,6 +31,12 @@ public interface i_user {
 	 * @return timestamp - returns the last sign in date
 	 */
 	function lastSignIn();
+	
+	/**
+	 * Gets the CurrentSessionId of this user
+	 * @return String - returns the CurrentSessionId of this user
+	 */
+	function getSessionId();
 	
 	/**
 	 * Gives the date, when this user registered

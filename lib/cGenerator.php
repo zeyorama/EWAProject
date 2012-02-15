@@ -7,7 +7,10 @@
 		
 		private $title = "No Title";
 		private $content = "No Content";
-		
+
+		/*
+		 * Private constructor for Singleton class
+		 */
 		private function __construct() {}
 		
 		/* (non-Javadoc)
