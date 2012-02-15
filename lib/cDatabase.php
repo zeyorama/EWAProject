@@ -74,17 +74,15 @@
 		public function exe_prepare() {
 			
 			if(func_num_args() != 0) { 
-				$method = new ReflectionMethod('mysqli_stmt', 'bind_param');  
-       	$method->invokeArgs($this->prep,func_get_args());
+				$method = new ReflectionMethod('mysqli_stmt', 'bind_param');
+				$method->invokeArgs($this->prep,func_get_args());
 			}
 			
 			$this->prep->execute();
-			
-			$this->result = $this->prep->get_result();
-			$this->prep->close();
+		  $this->result = $this->prep->get_result();
+ 			$this->prep->close();
 				
 		}
-		
 		/* (non-Javadoc)
 		 * @see i_db#get_next_result
 		*/
@@ -92,6 +90,7 @@
 			$tmp = $this->result->fetch_object($type);
 			if(!$tmp) {
 				$this->result->close();
+				return NULL;
 			}
 			return $tmp;
 		}

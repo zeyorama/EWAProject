@@ -1,6 +1,6 @@
 body {
   font-family: Ubuntu, Verdana, Arial, Helvetica, sans-serif;
-  font-size: 0.8em;
+  font-size: 0.9em;
   background-color: #fffec2;
   padding-left: 15px;
   padding-right: 15px;
@@ -11,7 +11,7 @@ div#head_background {
   background-repeat: repeat-x;
   height: 50px;
   font-weight: bold;
-  font-size: 2.8em;
+  font-size: 3.0em;
 }
 
 div#wrapper {
@@ -21,7 +21,7 @@ div#wrapper {
 div#navi {
   width: 200px;
   float: left;
-  font-size: 11px;
+  font-size: 1em;
   font-weight: bold;
 }
 
@@ -73,7 +73,7 @@ div#headline {
 div#footer {
   clear:both;
   text-align: center;
-  font-size: 0.7em;
+  font-size: 0.8em;
 }
 
 p#version {
@@ -93,4 +93,15 @@ font#re {
 
 hr#hr {
   color: #580070;
+}
+
+div#login {
+  text-align: right;
+  border: 2px solid silver;
+  border-radius: 3px;
+}
+
+input#txt {
+  background-color: #fff3ac;
+  border: 0px;
 }

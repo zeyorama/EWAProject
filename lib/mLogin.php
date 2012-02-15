@@ -10,7 +10,7 @@
 		$db->prepare("SELECT * FROM _user WHERE nick = ? AND pass = ? LIMIT 1;");
 		$db->exe_prepare("ss", $user, md5($pass));
 		while($u = $db->get_next_result("User")) {
-			$u->setSessionId(session_id());
+		  $u->setSessionId(session_id());
 			$u->setlastSignIn(date('Y-m-d H:i:s'));
 			$_SESSION['user'] = serialize($u);
 			return true;

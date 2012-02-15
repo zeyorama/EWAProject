@@ -1,3 +1,4 @@
+<?php include_once 'epic.php'; ?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -11,6 +12,10 @@
       EWAProject  <font id="re">We etablish your Events!</font>
     </div>
     
+    <div id="login">
+      <?php include 'partial/_login_head.php';?>
+    </div>
+    
     <div id="wrapper">
       
       <div id="navi">
@@ -18,25 +23,31 @@
       </div>
       
       <div id="yielded">
-        <?php
-          if (!isset($_GET['impress'])) {
-        ?>
+        <noscript>
+          To get all functions of this site, you need to activate JavaScript!
+        </noscript>
         <p>
-          Lorem ipsum dolor sit amet consectetuer mi interdum dolor Pellentesque hendrerit. Leo vitae.<br>
-          <br>
-          Malesuada lorem laoreet Curabitur facilisi Phasellus Cum lacinia quis condimentum pellentesque.<br>
-          <br>
-          Pellentesque Phasellus mi rutrum Nam gravida eros hendrerit massa consequat.<br>
-          <br>
-          Quisque senectus Donec condimentum cursus semper pellentesque nunc tincidunt consectetuer et.<br>
-          <br>
-          Die meisten Unfälle passieren in Haushalten, die meisten Haushalte passieren durch Unfälle.<br>
-        </p>
         <?php
-          } else {
+          if (isset($_GET['impress'])) {
             include 'partial/_impress.html';
+          
+          } else if (isset($_GET['profile'])) {
+            include 'partial/_profile.php';
+            
+          } else if (isset($_GET['new_event'])) {
+            include 'partial/_new_event.php';
+            
+          } else if (isset($_GET['messages'])) {
+            include 'partial/_message.php';
+            
+          } else if (isset($_GET['events'])) {
+            include 'partial/_event.php';
+          
+          } else {
+            include 'partial/_index.php';
           }
         ?>
+        </p>
       </div>
       
     </div>

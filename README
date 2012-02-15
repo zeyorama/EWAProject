@@ -3,7 +3,7 @@
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Event- and hiringtool
+Event- and hiringmanagementtool
 in PHP
 
 Developer:
@@ -19,3 +19,6 @@ MNI
 
 Martin Karry M.Sc.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Systemvoraussetzung:
+PHP 5.3.10

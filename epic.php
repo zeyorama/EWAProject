@@ -1,31 +1,17 @@
 <?php
 
+# starting session
 session_start();
- 
+
+# set default values for user and db
 $_SESSION['user'] = NULL;
 $_SESSION['db'] = NULL;
-if (file_exists('config.php')) {
-  include_once 'config.php';
-} else {
-  echo "config.php not found, please execute config.pl to generate config file<br />\n";
-  exit;
-}
 
-login("Quallenmann", "EWAProjectPass");
+# if config.php exists, it will be included, otherwise the script stopps and prints error message
+# #################################
+file_exists('config.php')
+  or die("config.php not found, please execute config.pl to generate config file<br />\n");
+include_once 'config.php';
+# #################################
 
-var_dump(signed_in());
-
-$gen->set_title("Test");
-$gen->add_content("<div>Miau</div>");
-
-$db->prepare("SELECT * FROM _user WHERE nick = ? OR nick = ?;");
-$db->exe_prepare("ss", "Quallenmann", "zeyorama");
-
-while($ar = $db->get_next_result("User")) {
-	echo "<br>{$ar->getNick()}   {$ar->getMail()}";
-}
-
-$gen->print_html();
-
-$db->close();
 ?>
