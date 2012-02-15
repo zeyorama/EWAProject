@@ -1,6 +1,6 @@
 <?php 
 
-public interface i_event {
+interface i_event {
 	
 	/**
 	 * Sets the FSK for this whole event<br>
