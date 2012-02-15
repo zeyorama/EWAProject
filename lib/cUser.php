@@ -66,6 +66,23 @@
 		
 		
 		/* (non-Javadoc)
+		 * @see i_user#setlastSignIn
+		*/
+		public function setlastSignIn($time) {
+			$this->last_signin = $time;
+			$this->updateDB();
+		}
+		
+		
+		/* (non-Javadoc)
+		 * @see i_user#setSessionId
+		*/
+		public function setSessionId($session_id) {
+			$this->session_id = $session_id;
+			$this->updateDB();
+		}
+		
+		/* (non-Javadoc)
 		 * @see i_user#getSessionId
 		*/
 		public function getSessionId() {
@@ -90,10 +107,39 @@
 		
 		
 		/* (non-Javadoc)
-		 * @see i_gen#getMail
+		 * @see i_user#getMail
 		*/
 		public function getMail() {
 			return $this->email;
+		}
+		
+		/* (non-Javadoc)
+		 * @see i_user#updateDB
+		*/
+		function updateDB() {
+			$db = $GLOBALS['db'];
+			$db->prepare("UPDATE _user SET 
+					nick = ?, 
+					email = ?, 
+					pass = ?, 
+					admin = ?, 
+					last_signin = ?, 
+					session_id = ?, 
+					locked = ? 
+				WHERE user_id = ? LIMIT 1;");
+			$db->exe_prepare("sssdssds", 
+					$this->nick, 
+					$this->email, 
+					$this->pass, 
+					$this->admin, 
+					$this->last_signin, 
+					$this->session_id, 
+					$this->locked, 
+					$this->user_id
+				);
+			var_dump($this);
+			echo "<br>";
+			echo "<br>";
 		}
 	}
 ?>

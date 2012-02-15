@@ -11,14 +11,18 @@ if (file_exists('config.php')) {
   exit;
 }
 
+login("Quallenmann", "EWAProjectPass");
+
+var_dump(signed_in());
+
 $gen->set_title("Test");
 $gen->add_content("<div>Miau</div>");
 
-$db->prepare("SELECT * FROM _user;");
-$db->exe_prepare();
+$db->prepare("SELECT * FROM _user WHERE nick = ? OR nick = ?;");
+$db->exe_prepare("ss", "Quallenmann", "zeyorama");
 
 while($ar = $db->get_next_result("User")) {
-	echo "{$ar->getNick()}   {$ar->getMail()}<br>";
+	echo "<br>{$ar->getNick()}   {$ar->getMail()}";
 }
 
 $gen->print_html();

@@ -27,6 +27,18 @@ interface i_user {
 	function getBelt();
 	
 	/**
+	 * Set the last sign in in date
+	 * @param timestamp - returns the last sign in date
+	 */
+	function setlastSignIn($time);
+	
+	/**
+	 * Sets the CurrentSessionId of this user
+	 * @param String - CurrentSessionId of this user
+	 */
+	function setSessionId($session_id);
+	
+	/**
 	 * Gives the last sign in date
 	 * @return timestamp - returns the last sign in date
 	 */
@@ -55,6 +67,11 @@ interface i_user {
 	 * @return String - returns users mail address
 	 */
 	function getMail();
+	
+	/**
+	 * Update the User data in database
+	 */
+	function updateDB();
 	
 }
 
