@@ -1,5 +1,4 @@
 <?php	
-
 	include_once 'lib/iGenre.php';	
 
 	final class Genre implements i_genre {
