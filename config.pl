@@ -23,6 +23,6 @@ system('touch config.php');
 
 open(_F, ">$cf");
   print(_F "<?php\n");
-  print(_F "\$_SESSION['root'] = '$current_path';\n");
+  print(_F "\$_SERVER['root'] = '$current_path';\n");
   print(_F "?>\n");
 close(_F);
