@@ -6,8 +6,8 @@
 		private static $instance = NULL;
 		
 		private $connection = NULL;
-		private $prep = NULL;
 		private $result = NULL;
+		private $array = NULL;
 		
 		/**
 		 * Private constructor for singleton class
@@ -36,12 +36,6 @@
 		 * @see i_db#close
 		 */
 		public function close() {
-			if($this->result) {
-				$this->result->close();
-			}
-			if($this->prep) {
-				$this->prep->close();
-			}
 			$this->connection->close();
 		}
 		
@@ -50,9 +44,6 @@
 		 * @see i_db#query
 		 */
 		public function query($query, $type) {
-			if($this->result) {
-				$this->result->close();
-			}
 			$this->result = $this->connection->query($query);
 		}
 		
@@ -61,10 +52,7 @@
 		 * @see i_db#prepare
 		 */
 		public function prepare($query) {
-			if($this->result) {
-				$this->result->close();
-			}
-			$this->prep = $this->connection->prepare($query);
+			$this->result = $this->connection->prepare($query);
 		}
 		
 		
@@ -74,21 +62,44 @@
 		public function exe_prepare() {
 			
 			if(func_num_args() != 0) { 
-				$method = new ReflectionMethod('mysqli_stmt', 'bind_param');
-				$method->invokeArgs($this->prep,func_get_args());
+
+				$method = new ReflectionMethod('mysqli_stmt', 'bind_param');  
+       	$method->invokeArgs($this->result,func_get_args());
 			}
 			
-			$this->prep->execute();
-		  $this->result = $this->prep->get_result();
- 			$this->prep->close();
-				
+			$this->result->execute();
+			
+			unset($this->array);
+			for($i = 0; $i < $this->result->field_count; $i++) {
+				$this->array[] = 0;
+			}
+			$method = new ReflectionMethod('mysqli_stmt', 'bind_result');
+			$method->invokeArgs($this->result, $this->array);
+			
+			/*
+			 * works definitely for Php version 5.3.10
+			 * For Php version < 5.3.10 Workaround
+			 */
+			//$this->result = $this->prep->get_result();
 		}
+	
 		/* (non-Javadoc)
 		 * @see i_db#get_next_result
 		*/
 		public function get_next_result($type) {
-			$tmp = $this->result->fetch_object($type);
-			if(!$tmp) {
+			class_exists($type) or die("Class $type not Found");
+			
+			if($this->result instanceof mysqli_result) {
+				$tmp = $this->result->fetch_object($type);
+			} else {
+				if($this->result->fetch()) {
+					$tmp = new $type($this->array);
+				} else {
+					$tmp = NULL;
+				}
+			}
+			
+			if($tmp == NULL) {
 				$this->result->close();
 				return NULL;
 			}

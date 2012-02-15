@@ -14,16 +14,19 @@
 		private $locked;
 		
 		public function __construct() {
-			if(func_num_args() == 9) {
-				$this->user_id = func_get_arg(0);
-				$this->nick = func_get_arg(1);
-				$this->email = func_get_arg(2);
-				$this->pass = func_get_arg(3);
-				$this->admin = func_get_arg(4);
-				$this->created_at = func_get_arg(5);
-				$this->last_signin = func_get_arg(6);
-				$this->session_id = func_get_arg(7);
-				$this->locked = func_get_arg(8);
+			if(func_num_args() == 1) {
+				$tmp = func_get_arg(0);
+				if(count($tmp) == 9) {
+					$this->user_id = $tmp[0];
+					$this->nick = $tmp[1];
+					$this->email = $tmp[2];
+					$this->pass = $tmp[3];
+					$this->admin = $tmp[4];
+					$this->created_at = $tmp[5];
+					$this->last_signin = $tmp[6];
+					$this->session_id = $tmp[7];
+					$this->locked = $tmp[8];
+				}
 			}
 		}
 		
@@ -116,7 +119,7 @@
 		/* (non-Javadoc)
 		 * @see i_user#updateDB
 		*/
-		function updateDB() {
+		public function updateDB() {
 			$db = $GLOBALS['db'];
 			$db->prepare("UPDATE _user SET 
 					nick = ?, 
