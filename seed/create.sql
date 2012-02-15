@@ -8,7 +8,7 @@ GRANT ALL PRIVILEGES ON `ewaproject` . * TO 'ewaproject'@'localhost';
 
 USE ewaproject;
 
-CREATE TABLE _user (
+CREATE TABLE _user IF NOT EXISTS (
 user_id int NOT NULL AUTO_INCREMENT,
 nick varchar(25) NOT NULL,
 email varchar(255) NOT NULL,
@@ -22,14 +22,14 @@ PRIMARY KEY (user_id),
 UNIQUE (email, nick)
 );
 
-CREATE TABLE _knowing (
+CREATE TABLE _knowing IF NOT EXISTS (
 knowing_id int NOT NULL AUTO_INCREMENT,
 user_id1 int NOT NULL,
 user_id2 int NOT NULL,
 PRIMARY KEY (knowing_id)
 );
 
-CREATE TABLE _event (
+CREATE TABLE _event IF NOT EXISTS (
 event_id int NOT NULL AUTO_INCREMENT,
 startDate TimeStamp,
 location text,
@@ -39,7 +39,7 @@ locked boolean,
 PRIMARY KEY (event_id)
 );
 
-CREATE TABLE _video (
+CREATE TABLE _video IF NOT EXISTS (
 video_id int NOT NULL AUTO_INCREMENT,
 title varchar(255),
 duration smallint,
@@ -49,13 +49,13 @@ release_year year,
 PRIMARY KEY (video_id)
 );
 
-CREATE TABLE _genre (
+CREATE TABLE _genre IF NOT EXISTS (
 genre_id int NOT NULL AUTO_INCREMENT,
 name varchar(128),
 PRIMARY KEY (genre_id)
 );
 
-CREATE TABLE _user_video (
+CREATE TABLE _user_video IF NOT EXISTS (
 uv_id int NOT NULL AUTO_INCREMENT,
 user_id int NOT NULL,
 video_id int NOT NULL,
@@ -63,21 +63,21 @@ shared_to int,
 PRIMARY KEY (uv_id)
 );
 
-CREATE TABLE _user_event (
+CREATE TABLE _user_event IF NOT EXISTS (
 ue_id int NOT NULL AUTO_INCREMENT,
 user_id int NOT NULL,
 event_id int NOT NULL,
 PRIMARY KEY (ue_id)
 );
 
-CREATE TABLE _event_video (
+CREATE TABLE _event_video IF NOT EXISTS (
 ev_id int NOT NULL AUTO_INCREMENT,
 ue_id int NOT NULL,
 video_id int NOT NULL,
 PRIMARY KEY (ev_id)
 );
 
-CREATE TABLE _pn (
+CREATE TABLE _pn IF NOT EXISTS (
 pn_id int NOT NULL AUTO_INCREMENT,
 subject varchar(128),
 content text,

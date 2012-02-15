@@ -9,6 +9,9 @@
 		private $prep = NULL;
 		private $result = NULL;
 		
+		/**
+		 * Private constructor for singleton class
+		 */
 		private function __construct() {}
 		
 		/* (non-Javadoc)

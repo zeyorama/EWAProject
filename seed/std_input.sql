@@ -32,3 +32,5 @@ INSERT INTO _video (title,duration,genre_id,FSK,release_year)
 VALUES ('The Passion of the Christ',127,10,16,2004);
 INSERT INTO _video (title,duration,genre_id,FSK,release_year)
 VALUES ('The Simpsons Movie',83,2,6,2007);
+INSERT INTO _video (title,duration,genre_id,FSK,release_year)
+VALUES ('Titanic',194,7,12,1997);

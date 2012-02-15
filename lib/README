@@ -1,1 +1,6 @@
 In this folder are all php script files used for EWSProject.
+
+All php files starting with:
+  i - are interfaces
+  c - are classes
+  m - are modules
