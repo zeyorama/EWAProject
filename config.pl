@@ -18,6 +18,7 @@ open(_F, ">$cf");
   print(_F "include_once 'lib/cDatabase.php';\n");
   print(_F "include_once 'lib/cGenerator.php';\n");
   print(_F "include_once 'lib/cGenre.php';\n");
+  print(_F "include_once 'lib/cUser.php';\n");
 
   print(_F "\$db = Database::instance();\n");
   print(_F "\$db->connect(\"ewaproject\", \"ewa_pass\", \"ewaproject\");\n");
