@@ -97,7 +97,6 @@
 						$this->array[$key] = (string)$value;
 					}
 					$tmp = new $type($this->array);
-					var_dump($tmp);
 				} else {
 					$tmp = NULL;
 				}
