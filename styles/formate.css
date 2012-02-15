@@ -1,0 +1,96 @@
+body {
+  font-family: Ubuntu, Verdana, Arial, Helvetica, sans-serif;
+  font-size: 0.8em;
+  background-color: #fffec2;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+div#head_background {
+  background-image: url(images/arbor.png);
+  background-repeat: repeat-x;
+  height: 50px;
+  font-weight: bold;
+  font-size: 2.8em;
+}
+
+div#wrapper {
+  padding-top: 25px;
+}
+
+div#navi {
+  width: 200px;
+  float: left;
+  font-size: 11px;
+  font-weight: bold;
+}
+
+a:hover {
+  color: #cc0000;
+  text-decoration: none;
+}
+
+a {
+  color: #000066;
+  text-decoration: none;
+}
+
+a#a {
+  color: black;
+}
+
+div#naviBorder1 {
+  padding-left: 5px;
+  width: 195px;
+  background-color: darken(gray, 30%);
+  border: 1px solid silver;
+  font-weight: bold;
+  color: white;
+}
+
+div#naviBorder2 {
+  padding-left: 5px;
+  margin-bottom: 5px;
+  border: 1px solid silver;
+  width: 195px;
+}
+
+div#yielded {
+  margin-left: 200px;
+  padding-left: 10px;
+}
+
+div#headline {
+  padding-left: 10px;
+  background-color: #ff9900;
+  height: 20px;
+  border-top: 1px solid silver;
+  border-bottom: 1px solid silver;
+  color: white;
+  font-weight: bold;
+}
+
+div#footer {
+  clear:both;
+  text-align: center;
+  font-size: 0.7em;
+}
+
+p#version {
+  font-size: 0.7em;
+  font-family: Ubuntu, Arial;
+}
+
+th#weite {
+  text-align: left;
+}
+
+font#re {
+  color: #ff9900;
+  font-size: 0.3em;
+  font-style: italic;
+}
+
+hr#hr {
+  color: #580070;
+}
