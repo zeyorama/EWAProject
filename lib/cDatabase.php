@@ -93,7 +93,11 @@
 				$tmp = $this->result->fetch_object($type);
 			} else {
 				if($this->result->fetch()) {
+					foreach ($this->array as $key => $value) {
+						$this->array[$key] = (string)$value;
+					}
 					$tmp = new $type($this->array);
+					var_dump($tmp);
 				} else {
 					$tmp = NULL;
 				}

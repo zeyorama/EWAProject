@@ -13,9 +13,9 @@ if (file_exists('config.php')) {
 
 //login("Quallenmann", "EWAProjectPass");
 
-//$db->query("SELECT * FROM _user");
-//echo "<br>";
-//var_dump(serialize($db->get_next_result("User")));
+$db->query("SELECT * FROM _user");
+echo "<br>";
+var_dump($db->get_next_result("User"));
 
 $gen->set_title("Test");
 $gen->add_content("<div>Miau</div>");
