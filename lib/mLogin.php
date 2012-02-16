@@ -6,13 +6,17 @@
 	 * @return true if logged in else false
 	 */
 	function login($user, $pass) {
-		$db = $GLOBALS['db'];
+		global $db;
 		$db->prepare("SELECT * FROM _user WHERE nick = ? AND pass = ? LIMIT 1;");
 		$db->exe_prepare("ss", $user, md5($pass));
+		$trigger = 0;
 		while($u = $db->get_next_result("User")) {
 		  $u->setSessionId(session_id());
 			$u->setlastSignIn(date('Y-m-d H:i:s'));
 			$_SESSION['user'] = serialize($u);
+			$trigger = 1;
+		}
+		if($trigger === 1) {
 			return true;
 		}
 		return false;
@@ -31,11 +35,15 @@
 	 */
 	function signed_in() {
 		if(isset($_SESSION['user'])) {
-		$db = $GLOBALS['db'];
+			global $db;
 			$user &= $_SESSION['user'];
 			$db->prepare("SELECT * FROM _user WHERE session_id = ? AND last_signin	< current_timestamp + 60*15*1000 LIMIT 1;");
 			$db->exe_prepare("s", session_id());
+			$trigger = 0;
 			while($u = $db->get_next_result("User")) {
+				$trigger = 1;
+			}
+			if($trigger === 1) {
 				return true;
 			}
 		}

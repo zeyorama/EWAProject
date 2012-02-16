@@ -6,6 +6,7 @@
 		private static $instance = NULL;
 		
 		private $connection = NULL;
+		private $stmt = NULL;
 		private $result = NULL;
 		private $array = NULL;
 		
@@ -43,8 +44,8 @@
 		/* (non-Javadoc)
 		 * @see i_db#query
 		 */
-		public function query($query, $type) {
-			$this->result = $this->connection->query($query);
+		public function query($query) {
+			$this->result = $this->connection->query($query, MYSQLI_STORE_RESULT);
 		}
 		
 		
@@ -52,7 +53,7 @@
 		 * @see i_db#prepare
 		 */
 		public function prepare($query) {
-			$this->result = $this->connection->prepare($query);
+			$this->stmt = $this->connection->prepare($query) or die("Cannot Prepare $query");
 		}
 		
 		
@@ -60,22 +61,28 @@
 		 * @see i_db#exe_prepare
 		 */
 		public function exe_prepare() {
-			
 			if(func_num_args() != 0) { 
-
+				echo "<br>";
 				$method = new ReflectionMethod('mysqli_stmt', 'bind_param');  
-       	$method->invokeArgs($this->result,func_get_args());
+       	$method->invokeArgs($this->stmt, func_get_args());
 			}
 			
-			$this->result->execute();
-			
-			unset($this->array);
-			for($i = 0; $i < $this->result->field_count; $i++) {
-				$this->array[] = 0;
+			$this->stmt->execute() or die("Cannot execute prepared sql command");
+			if($this->stmt->field_count > 0) {
+				
+				unset($this->array);
+				$this->array = array();
+				for($i = 0; $i < $this->stmt->field_count; $i++) {
+					$this->array[] = 0;
+				}
+				$method = new ReflectionMethod('mysqli_stmt', 'bind_result');
+				$method->invokeArgs($this->stmt, $this->array);
+				
+			} else {
+				echo "close<br>";
+				$this->stmt->close();
+				$this->stmt = NULL;
 			}
-			$method = new ReflectionMethod('mysqli_stmt', 'bind_result');
-			$method->invokeArgs($this->result, $this->array);
-			
 			/*
 			 * works definitely for Php version 5.3.10
 			 * For Php version < 5.3.10 Workaround
@@ -89,24 +96,22 @@
 		public function get_next_result($type) {
 			class_exists($type) or die("Class $type not Found");
 			
-			if($this->result instanceof mysqli_result) {
-				$tmp = $this->result->fetch_object($type);
-			} else {
-				if($this->result->fetch()) {
-					foreach ($this->array as $key => $value) {
-						$this->array[$key] = (string)$value;
-					}
-					$tmp = new $type($this->array);
+			if($this->stmt !== NULL) {
+				if($this->stmt->fetch()) {
+					return new $type($this->array);
 				} else {
-					$tmp = NULL;
+					$this->stmt->close();
+					$this->stmt = NULL;
+					return NULL;
+				}
+			} else {
+				if($tmp = $this->result->fetch_object($type)) {
+					return $tmp;
+				} else {
+					$this->result->free();
+					return NULL;
 				}
 			}
-			
-			if($tmp == NULL) {
-				$this->result->close();
-				return NULL;
-			}
-			return $tmp;
 		}
 		
 		/* (non-Javadoc)
