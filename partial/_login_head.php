@@ -1,6 +1,6 @@
 <?php
 
-  if (signed_in()) {
+  if (!signed_in()) {
   
 ?>
   <form action="login.php" method="POST">

@@ -6,8 +6,9 @@ session_start();
 date_default_timezone_set('Europe/Berlin');
 
 # set default values for user and db
-$_SESSION['user'] = NULL;
-$_SESSION['db'] = NULL;
+if(!isset($_SESSION['user'])) {
+	$_SESSION['user'] = NULL;
+}
 
 # if config.php exists, it will be included, otherwise the script stopps and prints error message
 # #################################

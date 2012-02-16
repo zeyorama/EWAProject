@@ -45,7 +45,8 @@
 		 * @see i_db#query
 		 */
 		public function query($query) {
-			$this->result = $this->connection->query($query, MYSQLI_STORE_RESULT);
+			$this->result = $this->connection->query($query);
+			var_dump($this->result);
 		}
 		
 		
@@ -62,7 +63,6 @@
 		 */
 		public function exe_prepare() {
 			if(func_num_args() != 0) { 
-				echo "<br>";
 				$method = new ReflectionMethod('mysqli_stmt', 'bind_param');  
        	$method->invokeArgs($this->stmt, func_get_args());
 			}
