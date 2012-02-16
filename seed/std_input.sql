@@ -1,3 +1,5 @@
+USE ewaproject;
+
 DELETE FROM _genre;
 DELETE FROM _video;
 

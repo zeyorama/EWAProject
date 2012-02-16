@@ -1,3 +1,5 @@
+USE ewaproject;
+
 DELETE FROM _user;
 DELETE FROM _event;
 DELETE FROM _user_event;
