@@ -1,4 +1,6 @@
-<?php 
+<?php
+
+include 'iEvent.php';
 
 /**
  * @author Frank Kevin Zey
@@ -81,7 +83,7 @@ class Event implements i_event {
 	/* (non-Javadoc)
 	 * @see i_event#getLocation
 	 */ 
-	public public function getLocation() {
+	public function getLocation() {
 	  return $this->location;
 	}
 	

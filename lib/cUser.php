@@ -72,7 +72,7 @@
 		 * @see i_user#getEvents
 		*/
 		public function getEvents() {
-			
+			return NULL;
 		}
 		
 		/* (non-Javadoc)
