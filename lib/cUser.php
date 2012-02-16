@@ -122,14 +122,14 @@
 		public function updateDB() {
 			global $db;
 			$db->query("UPDATE _user SET 
-					nick = {$this->nick}, 
-					email = {$this->email}, 
-					pass = {$this->pass}, 
+					nick = '{$this->nick}', 
+					email = '{$this->email}', 
+					pass = '{$this->pass}', 
 					admin = {$this->admin}, 
-					last_signin = {$this->last_signin}, 
-					session_id = {$this->session_id}, 
+					last_signin = '{$this->last_signin}', 
+					session_id = '{$this->session_id}', 
 					locked = {$this->locked} 
-				WHERE user_id = {$this->user_id} LIMIT 1;");
+				WHERE user_id = {$this->user_id};");
 		}
 	}
 ?>
