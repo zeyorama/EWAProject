@@ -53,6 +53,7 @@
     </div>
     
     <div id="footer">
+      <br><br><br>
       <a href="index.php?impress">Impressum</a>
     </div>
   </body>

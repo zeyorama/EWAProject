@@ -46,7 +46,6 @@
 		 */
 		public function query($query) {
 			$this->result = $this->connection->query($query);
-			var_dump($this->result);
 		}
 		
 		

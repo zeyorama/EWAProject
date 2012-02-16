@@ -25,7 +25,7 @@
   } else {
 
 ?>
-  <a href="index.php?profile">USERNAME</a>&nbsp;&nbsp;<a href="logout.php">Logout</a>
+  <a href="index.php?profile=<?=unserialize($_SESSION['user'])->getNick();?>"> <?= unserialize($_SESSION['user'])->getNick(); ?> </a>&nbsp;&nbsp;<a href="logout.php">Logout</a>
 <?php  
 
   }

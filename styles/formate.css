@@ -95,6 +95,10 @@ hr#hr {
   color: #580070;
 }
 
+hr#profile {
+  color: #ff9900;
+}
+
 div#login {
   text-align: right;
   border: 2px solid silver;
@@ -105,3 +109,20 @@ input#txt {
   background-color: #fff3ac;
   border: 0px;
 }
+
+div#profile_content {
+  width: 75%;
+  float: left;
+  font-size: 1em;
+  font-weight: bold;
+  padding-left: 10px;
+}
+
+div#profile_infos {
+  border: 2px solid silver;
+  border-radius: 3px;
+  width: 20%;
+  margin-left: 78%;
+  padding-left: 10px;
+}
+
