@@ -2,6 +2,9 @@
 
 	include_once 'iDatabase.php';
 	
+	/**
+	 * @author Markus Benjmain Kretsch
+	 */
 	final class Database implements i_db {
 		private static $instance = NULL;
 		

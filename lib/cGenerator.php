@@ -2,6 +2,9 @@
 
 	include_once 'lib/iGenerator.php';
 	
+	/**
+	 * @author Markus Benjmain Kretsch
+	 */
 	final class Generator implements i_gen {
 		private static $instance = NULL;
 		

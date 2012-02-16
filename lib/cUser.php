@@ -1,6 +1,9 @@
 <?php
 	include_once 'lib/iUser.php';
-
+	
+	/**
+	 * @author Markus Benjmain Kretsch
+	 */
 	final class User implements i_user {
 		
 		private $user_id;
@@ -34,12 +37,15 @@
 		 * @see i_user#getVideos
 		*/
 		public function getVideos() {
-			/*global $db;
-			$db->prepare("SELECT * FROM _user_video WHERE user_id = {$this->user_id};");
-			$db->exe_prepare();
-			while($asd = $db->get_next_result("stdClass")) {
-				var_dump($asd);
-			}*/
+			global $db;
+			$db->query("SELECT * FROM _video WHERE _video.video_id IN(
+					SELECT _user_video.video_id FROM _user_video WHERE _user_video.user_id = {$this->user_id}
+			);");
+			$videos = array();
+			while($vid = $db->get_next_result("Video")) {
+				$videos[] = $vid;
+			}
+			return $videos;
 		}
 		
 		/* (non-Javadoc)

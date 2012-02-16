@@ -3,6 +3,11 @@
 interface i_video {
 	
 	/**
+	 * @return int - returns the id of this video as integer
+	 */
+	function getID();
+	
+	/**
 	 * @return int - returns the release year of this video as integer
 	 */
 	function getRelease();
