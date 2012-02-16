@@ -31,7 +31,7 @@ $thisUser = $db->get_next_result('User');
     	$friends = $thisUser->getFriends();
     	foreach($friends as $f) {
     		$nick = $f->getNick();
-    		echo "<a href=index.php?profile=".urlencode($nick).">{$nick}</a>";
+    		echo "<a href=index.php?profile=".urlencode($nick).">{$nick}</a><br>";
     	}
     ?>
     <hr id="profile">
@@ -41,7 +41,8 @@ $thisUser = $db->get_next_result('User');
       if ($events != NULL) {
         foreach ($events as $e) {
           $event = $e->getName();
-          echo "<a href='index.php?event='".urlencode($event).">{$event}</a>";
+          $id = $e->getId();
+          echo "<a href='index.php?event=$id'>{$event}</a><br>";
         }
       } else {
         echo "No events";

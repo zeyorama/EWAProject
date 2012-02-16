@@ -53,13 +53,17 @@
 		*/
 		public function getFriends() {
 			global $db;
-			$db->prepare("SELECT * FROM _user WHERE user_id IN (SELECT user_id2 FROM _knowing WHERE user_id1 = {$this->user_id});");
+			$db->prepare("SELECT * FROM _user WHERE user_id IN (
+					SELECT user_id2 FROM _knowing WHERE user_id1 = {$this->user_id} AND user_id2 != user_id1
+				);");
 			$db->exe_prepare();
 			$friends = array();
 			while($asd = $db->get_next_result("User")) {
 				$friends[] = $asd;
 			}
-			$db->prepare("SELECT * FROM _user WHERE user_id IN (SELECT user_id1 FROM _knowing WHERE user_id2 = {$this->user_id});");
+			$db->prepare("SELECT * FROM _user WHERE user_id IN (
+					SELECT user_id1 FROM _knowing WHERE user_id2 = {$this->user_id} AND user_id2 != user_id1
+				);");
 			$db->exe_prepare();
 			while($asd = $db->get_next_result("User")) {
 				$friends[] = $asd;
@@ -72,7 +76,16 @@
 		 * @see i_user#getEvents
 		*/
 		public function getEvents() {
-			return NULL;
+			global $db;
+			$db->query("SELECT * FROM _event WHERE _event.event_id IN (
+					SELECT _user_event.event_id FROM _user_event WHERE _user_event.user_id = {$this->user_id}
+				)");
+			$events = array();
+			while($ev = $db->get_next_result("Event")) {
+				$events[] = $ev;
+			}
+			
+			return $events;
 		}
 		
 		/* (non-Javadoc)
