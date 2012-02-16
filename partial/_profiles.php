@@ -24,8 +24,8 @@ HIER KOMMT NE LISTE MIT ALLEN USERN HIN
       $nick = $u->getNick();
 ?>
   <tr>
-    <td><a href="index.php?profile=<?= $nick; ?>"><?= $nick; ?></a></td>
-    <td><?= count($u->getEvents()); ?></td>
+    <td><a href="index.php?profile=<?php echo $nick; ?>"><?php echo $nick; ?></a></td>
+    <td><?php echo count($u->getEvents()); ?></td>
     <td><?php if ($u->isAdmin()) { echo 'admin'; } ?></td>
   </tr>
 <?php

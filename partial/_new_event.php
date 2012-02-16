@@ -11,14 +11,14 @@
 </p>
 <p>
   When will be the event begin?<br>
-  <input name="start" value="<?= date('Y-m-d H:i:s'); ?>">&nbsp;&lt;Formate: yyyy-mm-dd hh:mm:ss&gt;<br>
+  <input name="start" value="<?php echo date('Y-m-d H:i:s'); ?>">&nbsp;&lt;Formate: yyyy-mm-dd hh:mm:ss&gt;<br>
 </p>
 <p>
   Insert the event description here:<br>
   <textarea name="description" style="width:250px;"></textarea><br>
 </p>
 <p>
-  <input type="hidden" value="<?= unserialize($_SESSION['user'])->getId(); ?>" name="id">
+  <input type="hidden" value="<?php echo unserialize($_SESSION['user'])->getId(); ?>" name="id">
   <input type="submit" value="Create"><br>
 </p>
 </form>

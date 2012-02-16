@@ -1,4 +1,4 @@
-<img src="images/dot.png">&nbsp;<a href="<?='index.php' ?>">Home</a>
+<img src="images/dot.png">&nbsp;<a href="index.php">Home</a>
 <?php
   # shows navbar only if user is signed in
   if (!$_SESSION['user'] == NULL) {
