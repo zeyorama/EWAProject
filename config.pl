@@ -70,3 +70,5 @@ open(_F, ">$cf");
   print(_F "\$gen = Generator::instance();\n");
   print(_F "?>\n");
 close(_F);
+system('clear');
+print("\nDatabase, user and tables created. Have fun with EWSProject!\n\n");

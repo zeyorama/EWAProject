@@ -34,6 +34,9 @@
           } else if (isset($_GET['profile'])) {
             include 'partial/_profile.php';
             
+          } else if (isset($_GET['profiles'])) {
+            include 'partial/_profiles.php';
+            
           } else if (isset($_GET['new_event'])) {
             include 'partial/_new_event.php';
             
