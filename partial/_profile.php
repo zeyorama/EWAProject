@@ -15,7 +15,15 @@ $thisUser = $db->get_next_result('User');
   Bei Stromausfall ist die beste Gelegenheit mit Ihrem Föhn zu baden!
   <hr id="profile"><br>
   <div id="profile_content">
-    NAme und der kack<br><br><br>sonstiger mist
+    NAme und der kack<br><br><br>Videos:
+    <?php 
+    	$videos = $thisUser->getVideos();
+    	foreach($videos as $f) {
+    		$id = $f->getID();
+    		$title = $f->getTitle();
+    		echo "<div id='video$id'><a href=index.php?video=".$id.">".$title."</a></div>";
+    	}
+    ?>
   </div>
   <div id="profile_infos">
     <b>Friends</b><br>

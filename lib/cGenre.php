@@ -1,6 +1,9 @@
 <?php	
 	include_once 'lib/iGenre.php';	
-
+	
+	/**
+	 * @author Markus Benjmain Kretsch
+	 */
 	final class Genre implements i_genre {
 		private $genre_id;
 		private $name;
