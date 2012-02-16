@@ -16,5 +16,8 @@ file_exists('config.php')
   or die("config.php not found, please execute config.pl to generate config file<br />\n");
 include_once 'config.php';
 # #################################
+if(isset($_SESSION['user'])) {
+	$user = unserialize($_SESSION['user']);
+}
 
 ?>

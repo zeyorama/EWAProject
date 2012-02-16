@@ -19,7 +19,13 @@ $thisUser = $db->get_next_result('User');
   </div>
   <div id="profile_infos">
     <b>Friends</b><br>
-    FRIENDENTRY
+    <?php 
+    	$friends = $thisUser->getFriends();
+    	foreach($friends as $f) {
+    		$nick = $f->getNick();
+    		echo "<a href=index.php?profile=".urlencode($nick).">{$nick}</a>";
+    	}
+    ?>
     <hr id="profile">
     <b>Events</b><br>
     EVENTENTRY

@@ -69,6 +69,30 @@ interface i_user {
 	function getMail();
 	
 	/**
+	 * Gives the id of this user
+	 * @return Int - returns users id
+	 */
+	function getId();
+	
+	/**
+	 * Gives the locket state of this user
+	 * @return Boolean - returns true if the users is locket
+	 */
+	function isLocked();
+	
+	/**
+	 * Gives the MD5 Hash of password of this user
+	 * @return String - returns MD5 Hash of password
+	 */
+	function getPass();
+	
+	/**
+	 * Gives a Array of Friends(User) of this user
+	 * @return Array of User
+	 */
+	function getFriends();
+	
+	/**
 	 * Update the User data in database
 	 */
 	function updateDB();

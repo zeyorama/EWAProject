@@ -34,8 +34,33 @@
 		 * @see i_user#getVideos
 		*/
 		public function getVideos() {
-			
+			/*global $db;
+			$db->prepare("SELECT * FROM _user_video WHERE user_id = {$this->user_id};");
+			$db->exe_prepare();
+			while($asd = $db->get_next_result("stdClass")) {
+				var_dump($asd);
+			}*/
 		}
+		
+		/* (non-Javadoc)
+		 * @see i_user#getFriends
+		*/
+		public function getFriends() {
+			global $db;
+			$db->prepare("SELECT * FROM _user WHERE user_id IN (SELECT user_id2 FROM _knowing WHERE user_id1 = {$this->user_id});");
+			$db->exe_prepare();
+			$friends = array();
+			while($asd = $db->get_next_result("User")) {
+				$friends[] = $asd;
+			}
+			$db->prepare("SELECT * FROM _user WHERE user_id IN (SELECT user_id1 FROM _knowing WHERE user_id2 = {$this->user_id});");
+			$db->exe_prepare();
+			while($asd = $db->get_next_result("User")) {
+				$friends[] = $asd;
+			}
+			return $friends;
+		}
+		
 		
 		/* (non-Javadoc)
 		 * @see i_user#getEvents
@@ -114,6 +139,27 @@
 		*/
 		public function getMail() {
 			return $this->email;
+		}
+		
+		/* (non-Javadoc)
+		 * @see i_user#getId
+		*/
+		public function getId() {
+			return $this->user_id;
+		}
+		
+		/* (non-Javadoc)
+		 * @see i_user#isLocked
+		*/
+		public function isLocked() {
+			return $this->locked;
+		}
+		
+		/* (non-Javadoc)
+		 * @see i_user#getPass
+		*/
+		public function getPass() {
+			return $this->pass;
 		}
 		
 		/* (non-Javadoc)
