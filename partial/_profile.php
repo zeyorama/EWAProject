@@ -28,6 +28,12 @@ $thisUser = $db->get_next_result('User');
     ?>
     <hr id="profile">
     <b>Events</b><br>
-    EVENTENTRY
+    <?php
+      $events = $thisUser->getEvents();
+      foreach ($events as $e) {
+        $event = $e->getName();
+        echo "<a href='index.php?event='".urlencode($event).">{$event}</a>";
+      }
+    ?>
   </div>
 </div>

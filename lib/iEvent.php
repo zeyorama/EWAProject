@@ -1,5 +1,8 @@
 <?php 
 
+/**
+ * @author Markus Benjamin Kretsch, Frank Kevin Zey
+ */
 interface i_event {
 	
 	/**
@@ -42,6 +45,18 @@ interface i_event {
 	 * @return array [user-object] - returns all users, who visit this event, returns NULL, only the organizer visits this event
 	 */
 	function getAllVisitors();
+	
+	/**
+	 * Gives the event_id;
+	 * @return int - returns the event_id of this event object
+	 */
+	function getId();
+	
+	/**
+	 * Gives the event name
+	 * @return String - returns the event name
+	 */
+	function getName();
 	
 }
 

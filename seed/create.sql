@@ -28,6 +28,8 @@ location text,
 description text,
 owner_user_id int,
 locked boolean,
+FSK int,
+name varchar(255),
 PRIMARY KEY (event_id)
 );
 
