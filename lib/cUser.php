@@ -120,29 +120,16 @@
 		 * @see i_user#updateDB
 		*/
 		public function updateDB() {
-			$db = $GLOBALS['db'];
-			$db->prepare("UPDATE _user SET 
-					nick = ?, 
-					email = ?, 
-					pass = ?, 
-					admin = ?, 
-					last_signin = ?, 
-					session_id = ?, 
-					locked = ? 
-				WHERE user_id = ? LIMIT 1;");
-			$db->exe_prepare("sssdssds", 
-					$this->nick, 
-					$this->email, 
-					$this->pass, 
-					$this->admin, 
-					$this->last_signin, 
-					$this->session_id, 
-					$this->locked, 
-					$this->user_id
-				);
-			var_dump($this);
-			echo "<br>";
-			echo "<br>";
+			global $db;
+			$db->query("UPDATE _user SET 
+					nick = {$this->nick}, 
+					email = {$this->email}, 
+					pass = {$this->pass}, 
+					admin = {$this->admin}, 
+					last_signin = {$this->last_signin}, 
+					session_id = {$this->session_id}, 
+					locked = {$this->locked} 
+				WHERE user_id = {$this->user_id} LIMIT 1;");
 		}
 	}
 ?>

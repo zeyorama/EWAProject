@@ -30,9 +30,8 @@ interface i_db {
   /**
    * Executes a given query and get a result object
    * @param query - query to execute
-   * @param type: type of result object
    */
-  public function query($query, $type);
+  public function query($query);
   
   /**
    * Send query to MySQL Server to prepare

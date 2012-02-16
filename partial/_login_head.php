@@ -1,6 +1,6 @@
 <?php
 
-  if ($_SESSION['user'] == NULL) {
+  if (signed_in()) {
   
 ?>
   <form action="login.php" method="POST">

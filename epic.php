@@ -3,6 +3,8 @@
 # starting session
 session_start();
 
+date_default_timezone_set('Europe/Berlin');
+
 # set default values for user and db
 $_SESSION['user'] = NULL;
 $_SESSION['db'] = NULL;
