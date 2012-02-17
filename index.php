@@ -40,7 +40,10 @@
           } else if (isset($_GET['new_event'])) {
             include 'partial/_new_event.php';
             
-          } else if (isset($_GET['messages'])) {
+          } else if (isset($_GET['new_message'])) {
+            include 'partial/_new_message.php';
+            
+          }else if (isset($_GET['messages'])) {
             include 'partial/_message.php';
             
           } else if (isset($_GET['events'])) {

@@ -14,7 +14,17 @@
 		private $release_year;
 		
 		public function __construct() {
-			
+			if(func_num_args() == 1) {
+				$tmp = func_get_arg(0);
+				if(count($tmp) == 6) {
+					$this->video_id = $tmp[0];
+					$this->title = $tmp[1];
+					$this->duration = $tmp[2];
+					$this->genre_id = $tmp[3];
+					$this->FSK = $tmp[4];
+					$this->release_year = $tmp[5];
+				}
+			}
 		}
 		
 		/* (non-Javadoc)

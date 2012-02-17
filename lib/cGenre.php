@@ -13,9 +13,12 @@
 		 * @param optional: genre_id to set id, name to set name
 		 */
 		public function __construct() {
-			if(func_num_args() == 2) {
-				$this->genre_id = func_get_arg(0);
-				$this->name = func_get_arg(1);
+			if(func_num_args() == 1) {
+				$tmp = func_get_arg(0);
+				if(count($tmp) == 9) {
+					$this->genre_id = $tmp[0];
+					$this->name = $tmp[1];
+				}
 			}
 		}
 		
