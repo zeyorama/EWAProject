@@ -89,6 +89,20 @@
 		}
 		
 		/* (non-Javadoc)
+		 * @see i_user#getCreatedEvents
+		*/
+		public function getCreatedEvents() {
+			global $db;
+			$db->query("SELECT * FROM _event WHERE _event.owner_user_id = {$this->user_id} ORDER BY startDate;");
+					$events = array();
+					while($ev = $db->get_next_result("Event")) {
+					$events[] = $ev;
+			}
+			
+			return $events;
+		}
+		
+		/* (non-Javadoc)
 		 * @see i_user#isAdmin
 		*/
 		public function isAdmin() {

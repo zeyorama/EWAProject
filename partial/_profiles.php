@@ -1,6 +1,7 @@
 <?php
   global $db;
-  $db->query("SELECT * FROM _user;");
+  $db->query("SELECT * FROM _user ORDER BY nick;");
+ 
   
   while ($user = $db->get_next_result('User')) {
     $users[] = $user;
@@ -20,7 +21,7 @@ HIER KOMMT NE LISTE MIT ALLEN USERN HIN
   </tr>
 <?php foreach($users as $u) { ?>
 <?php
-    if (!(!$u->isLocked() && !$u->isAdmin())) {
+    if (!$u->isLocked()) {
       $nick = $u->getNick();
 ?>
   <tr>

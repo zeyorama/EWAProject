@@ -1,5 +1,9 @@
 <?php 
 
+
+/**
+ * @author Markus Benjamin Kretsch, Frank Kevin Zey
+ */
 interface i_user {
 	
 	/**
@@ -10,9 +14,15 @@ interface i_user {
 	
 	/**
 	 * Gives all events from this user
-	 * @return [Event-Object] - returns array of all events
+	 * @return [Event-Object] - returns array of all events the user is added
 	 */
 	function getEvents();
+	
+	/**
+	 * Gives all events from this user created by him
+	 * @return [Event-Object] - returns array of all the user created events
+	 */
+	function getCreatedEvents();
 	
 	/**
 	 * Is user an admin?

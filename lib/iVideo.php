@@ -1,5 +1,9 @@
 <?php 
 
+
+/**
+ * @author Markus Benjamin Kretsch, Frank Kevin Zey
+ */
 interface i_video {
 	
 	/**

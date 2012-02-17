@@ -3,6 +3,7 @@ global $db;
 $db->query("SELECT * FROM _user WHERE nick='{$_GET['profile']}' LIMIT 1;");
 $thisUser = $db->get_next_result('User');
 ?>
+<script type="text/javascript" src="script/profile_drop_down.js"></script>
 <div id="profile">
 
   <h2><?php
@@ -15,19 +16,47 @@ $thisUser = $db->get_next_result('User');
   Bei Stromausfall ist die beste Gelegenheit mit Ihrem Föhn zu baden!
   <hr id="profile"><br>
   <div id="profile_content">
-    NAme und der kack<br><br><br>Videos:
-    <?php 
-    	$videos = $thisUser->getVideos();
-      if ($videos != NULL) {
-	    	foreach($videos as $f) {
-	    		$id = $f->getID();
-	    		$title = $f->getTitle();
-	    		echo "<div id='video$id'><a href=index.php?video=".$id.">".$title."</a></div>";
-	    	}
-      } else {
-      	echo "No Videos";
-      }
-    ?>
+    NAme und der kack
+  <br>
+  <br>
+    <div id='cEvents'>
+	    <img id ='image_cEvents_content' alt="" src="" onclick='switch_cEvents();'>
+	    Created Events
+    	<div id='cEvents_content'>
+		    <?php 
+		    	$cevents = $thisUser->getCreatedEvents();
+		      if ($cevents != NULL) {
+			    	foreach($cevents as $f) {
+			    		$id = $f->getID();
+			    		$name = $f->getName();
+			    		$start = $f->startDate();
+			    		echo "<div id='event$id'>$start&nbsp;<a href=index.php?events=".$id.">".$name."</a></div>";
+			    	}
+		      } else {
+		      	echo "No Created Events";
+		      }
+		    ?>
+    	</div>
+    </div>
+    <br>
+    <div id='videos'>
+	    <img id ='image_videos_content' alt="" src="" onclick='switch_videos();'>
+	    Videos
+    	<div id='videos_content'>
+		    <?php 
+		    	$videos = $thisUser->getVideos();
+		      if ($videos != NULL) {
+			    	foreach($videos as $f) {
+			    		$id = $f->getID();
+			    		$title = $f->getTitle();
+			    		echo "<div id='video$id'><a href=index.php?video=".$id.">".$title."</a></div>";
+			    	}
+		      } else {
+		      	echo "No Videos";
+		      }
+		    ?>
+	    </div>
+    </div>
   </div>
   <div id="profile_infos">
     <b>Friends</b><br>
@@ -58,3 +87,16 @@ $thisUser = $db->get_next_result('User');
     ?>
   </div>
 </div>
+	
+		<!-- 
+ 			The divs for created_events and videos first invisible , if javascript is activated
+   		Also the image src will be set for the plus and the minus
+		-->
+    <script type="text/javascript">
+  		document.getElementById("videos_content").style.display = 'none';
+			document.getElementById("cEvents_content").style.display = 'none';
+
+			document.getElementById("image_cEvents_content").src = "images/plus.png";
+			document.getElementById("image_videos_content").src = "images/plus.png";
+			
+    </script>
