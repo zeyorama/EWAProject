@@ -16,7 +16,7 @@
   </head>
   <body>
     <div id="head_background">
-      EWAProject  <font id="re">We etablish your Events!</font>
+      <a href='index.php'>EWAProject</a>  <font id="re">We etablish your Events!</font>
       <font id="re2">Administrationarea</font>
       <?php
 # Auskommentieren wenn epic.php bzw. mysqli wieder funtzt
