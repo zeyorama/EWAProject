@@ -34,7 +34,7 @@ interface i_video {
 	/**
 	 * @return genre-object - returns the genre of this video
 	 */
-	function getGenre();	
+	function getGenre();
 	
 }
 

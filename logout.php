@@ -2,8 +2,8 @@
 
 include 'epic.php';
 
-logout();
+logout(); # logs user out
 
-header("Location: index.php");
+header("Location: index.php"); # redirect to main page
 
 ?>

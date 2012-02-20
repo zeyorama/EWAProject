@@ -45,7 +45,6 @@ print("\n\nNice. Now the user and the Database will be etablished!\n");
 
 system("mysql -u $dbRoot -p$dbPass <seed/db.sql");
 system("mysql -u $dbRoot -p$dbPass <seed/create.sql");
-system("mysql -u $dbRoot -p$dbPass <seed/std_input.sql");
 
 # config file
 $cf = 'config.php';
@@ -71,4 +70,4 @@ open(_F, ">$cf");
   print(_F "?>\n");
 close(_F);
 system('clear');
-print("\nDatabase, user and tables created. Have fun with EWSProject!\n\n");
+print("\nDatabase, user and tables created. EWAProject is now configured.\nHave fun with EWAProject!\n\n");

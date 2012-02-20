@@ -3,10 +3,10 @@
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Event- and hiringmanagementtool
+event- and hiringmanagementtool
 in PHP
 
-Developer:
+developer:
 Quallenmann
 zeyorama
 
@@ -20,5 +20,6 @@ MNI
 Martin Karry M.Sc.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Systemvoraussetzung:
-PHP 5.3.10
+Systemspecification:
+PHP.... v.5.3.10
+MySQL.. v.5.1

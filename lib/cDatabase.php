@@ -56,7 +56,7 @@
 		 * @see i_db#prepare
 		 */
 		public function prepare($query) {
-			$this->stmt = $this->connection->prepare($query) or die("Cannot Prepare $query");
+			$this->stmt = $this->connection->prepare($query) or die("cannot prepare $query");
 		}
 		
 		
@@ -86,8 +86,8 @@
 				$this->stmt = NULL;
 			}
 			/*
-			 * works definitely for Php version 5.3.10
-			 * For Php version < 5.3.10 Workaround
+			 * works definitely for php version 5.3.10
+			 * for php version < 5.3.10 workaround
 			 */
 			//$this->result = $this->prep->get_result();
 		}

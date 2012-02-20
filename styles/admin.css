@@ -1,0 +1,102 @@
+body {
+  font-family: Ubuntu, Verdana, Arial, Helvetica, sans-serif;
+  font-size: 0.9em;
+  background-color: #888888;
+}
+
+div {
+  border-radius: 8px;
+}
+
+div#head_background {
+  height: 85px;
+  font-weight: bold;
+  font-size: 3.0em;
+}
+
+p#logout:hover {
+  display: inline;
+  background-color: silver;
+  border-radius: 15px;
+}
+
+p#logout {
+  display: inline;
+  margin: 4px 7px 4px 7px;
+  padding: 4px 6px 4px 6px;
+  float: right;
+  font-size: 0.8em;
+}
+
+div#navbar {
+  height: 40px;
+  padding-left: 25px;
+  padding-right: 25px;
+  font-weight: bold;
+}
+
+p#navItem {
+  display: inline;
+  margin: 10px 18px 10px 18px;
+  padding: 8px 12px 8px 12px ;
+}
+
+p#navItem:hover {
+  display: inline;
+  background-color: silver;
+  border-radius: 15px;
+}
+
+div#board {
+  background-color: #BBB;
+  padding: 15px;
+}
+
+table#info tr th {
+  padding: 0px 5px 0px 5px;
+  text-align: left;
+}
+
+table#info tr td {
+  padding: 5px 5px 0px 5px;
+  height: 25px;
+  border-bottom: 1px solid gray;
+}
+
+div#footer {
+  clear: both;
+  margin-top: 15px;
+  text-align: center;
+  font-size: 0.8em;
+}
+
+a#impress:hover {
+  color: #FFF;
+  text-decoration: none;
+}
+
+a {
+  color: #000;
+  text-decoration: none;
+}
+
+font#re {
+  color: #ff9900;
+  font-size: 0.3em;
+  font-style: italic;
+}
+
+font#re2 {
+  padding-left: 150px;
+  color: #FF9900;
+  font-style: italic;
+}
+
+hr#hr {
+  color: #580070;
+}
+
+div#login {
+  text-align: right;
+  border: 2px solid silver;
+}
