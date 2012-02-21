@@ -20,6 +20,7 @@
     <input type="submit" value="Login" id="txt">
     &nbsp;&nbsp;&nbsp;
     <a href="index.php?register">Register</a>&nbsp;
+    </form>
 <?php
   
   } else {

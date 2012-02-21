@@ -1,17 +1,17 @@
 <?php
-#  include_once 'epic.php';
-#  if (signed_in()) {
-#    if ( !( unserialize($_SESSION['user'])->isAdmin() ) ) {
-#      header("Location: index.php");
-#    }
-#  }
+  include_once 'epic.php';
+  if (signed_in()) {
+    if ( !( unserialize($_SESSION['user'])->isAdmin() ) ) {
+      header("Location: index.php");
+    }
+  }
 ?>
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset='utf-8'>
-    <meta content="author" value="Markus Benjamin Kretsch">
-    <meta content="author" value="Frank Kevin Zey">
+    <meta content="author" name="Markus Benjamin Kretsch">
+    <meta content="author" name="Frank Kevin Zey">
     <link href="styles/admin.css" rel="stylesheet" type="text/css">
   </head>
   <body>
@@ -19,21 +19,20 @@
       <a href='index.php'>EWAProject</a>  <font id="re">We etablish your Events!</font>
       <font id="re2">Administrationarea</font>
       <?php
-# Auskommentieren wenn epic.php bzw. mysqli wieder funtzt
-#      if (signed_in()) {
-#        if ( !( unserialize($_SESSION['user'])->isAdmin() ) ) {
-#          echo '<a href="logout.php"><p id="logout">Logout</p><a>';
-#        }
-#      }
+      if (signed_in()) {
+        if ( !( unserialize($_SESSION['user'])->isAdmin() ) ) {
+          echo '<a href="logout.php"><p id="logout">Logout</p><a>';
+        }
+      }
       ?>
       <hr>
     </div>
     
     <div id="navbar">
-      <a href="admin.php"><p id="navItem">Dashboard</p></a>
-      <a href="admin.php?users"><p id="navItem">User</p></a>
-      <a href="admin.php?videos"><p id="navItem">Video</p></a>
-      <a href="admin.php?events"><p id="navItem">Event</p></a>
+      <p id="navItem"><a href="admin.php">Dashboard</a></p>
+      <p id="navItem"><a href="admin.php?users">User</a></p>
+      <p id="navItem"><a href="admin.php?videos">Video</a></p>
+      <p id="navItem"><a href="admin.php?events">Event</a></p>
       <!--
         <a href="admin.php?item"><p id="navItem">Item</p></a>
         Here are space for more nav items!

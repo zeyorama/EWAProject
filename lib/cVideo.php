@@ -67,8 +67,10 @@
 		*/
 		public function getGenre() {
 			global $db;
-			$db->prepare("SELECT * FROM _genre WHERE genre_id = {$this->genre_id}");
-			if($gen = $db->get_netxt_result("Genre")) {
+			$db->prepare("SELECT * FROM _genre WHERE genre_id = {$this->genre_id};");
+			$db->exe_prepare();
+			if($gen = $db->get_next_result("Genre")) {
+				while($db->get_next_result("Genre"));
 				return $gen;
 			} else {
 				return NULL;

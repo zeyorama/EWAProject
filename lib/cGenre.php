@@ -15,7 +15,7 @@
 		public function __construct() {
 			if(func_num_args() == 1) {
 				$tmp = func_get_arg(0);
-				if(count($tmp) == 9) {
+				if(count($tmp) == 2) {
 					$this->genre_id = $tmp[0];
 					$this->name = $tmp[1];
 				}

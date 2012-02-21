@@ -3,8 +3,8 @@
 <html>
   <head>
     <meta charset='utf-8'>
-    <meta content="author" value="Markus Benjamin Kretsch">
-    <meta content="author" value="Frank Kevin Zey">
+    <meta content="author" name="Markus Benjamin Kretsch">
+    <meta content="author" name="Frank Kevin Zey">
     <link href="styles/formate.css" rel="stylesheet" type="text/css">
   </head>
   <body>

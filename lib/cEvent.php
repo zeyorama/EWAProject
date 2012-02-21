@@ -39,7 +39,7 @@ class Event implements i_event {
 	 * @see i_event#setFKS
 	 */
 	public function setFSK() {
-	  $FSK = 0;
+	  $this->FSK = 0;
 	  $videos = $this->getVideos();
 	  
 	  if ($videos == NULL) { return; }
@@ -47,13 +47,20 @@ class Event implements i_event {
 	  foreach ($videos as $v) {
 	    $vFSK = $v->getFSK();
 	    if ($vFSK >= 18) {
-	      $FSK = $vFSK;
+	      $this->FSK = $vFSK;
 	      return;
 	    }
-	    if ($vFSK > $FSK) {
-	      $FSK = $vFSK;
+	    if ($vFSK > $this->FSK) {
+	      $this->FSK = $vFSK;
 	    }
 	  }
+	}
+	
+	/* (non-Javadoc)
+	 * @see i_event#getFSK
+	*/
+	public function getFSK() {
+		return $this->FSK;
 	}
 	
 	/* (non-Javadoc)
@@ -63,7 +70,9 @@ class Event implements i_event {
 	  $videos = Array();
 	  
 	  global $db;
-	  $db->query("SELECT * FROM _video WHERE _video.video_id IN (SELECT video_id FROM _event_video WHERE event_id = {$this->event_id});");
+	  $db->query("SELECT * FROM _video WHERE _video.video_id IN (
+	  		SELECT _event_video.video_id FROM _event_video WHERE ue_id = {$this->event_id}
+	  );");
 	  
 	  while($video = $db->get_next_result("Video")) {
 	  	$videos[] = $video;
@@ -92,7 +101,7 @@ class Event implements i_event {
 	 */
 	public function Owner() {
 	  global $db;
-	  $db->query("SELECT * FROM _user WHERE _user.id = {$this->owner_user_id};");
+	  $db->query("SELECT * FROM _user WHERE user_id = {$this->owner_user_id};");
 	  return $db->get_next_result("User");
 	}
 	
@@ -127,6 +136,13 @@ class Event implements i_event {
 	 return $this->name; 
 	}
 	
+	
+	/* (non-Javadoc)
+	 * @see i_event#getDescription
+	*/
+	public function getDescription() {
+		return $this->description;
+	}
 }
 
 ?>

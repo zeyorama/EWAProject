@@ -58,6 +58,18 @@ interface i_event {
 	 */
 	function getName();
 	
+	/**
+	 * Gives the event description
+	 * @return String - returns the description of the event
+	 */
+	function getDescription();
+	
+	/**
+	 * Gives the event fsk
+	 * @return String - returns the fsk of the event
+	 */
+	function getFSK();
+	
 }
 
 ?>

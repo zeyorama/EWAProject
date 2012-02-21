@@ -1,10 +1,10 @@
 <?php
-#  global $db;
-#  $db->query("SELECT * FROM _event ORDER BY id;");
+  global $db;
+  $db->query("SELECT * FROM _event ORDER BY event_id;");
  
-#  while ($event = $db->get_next_result('Event')) {
-#  $events[] = $event;
-#  }
+  while ($event = $db->get_next_result('Event')) {
+  $events[] = $event;
+  }
 ?>
 <div id="board">
 
@@ -25,23 +25,26 @@
     <th>location</th>
   </tr>
 <?php
-#  foreach ($events as $e) {
+  foreach ($events as $e) {
 ?>
   <tr>
-    <td><?php #echo "$e.>getId()"; ?></td>
-    <td><?php #echo "$e.>getName()"; ?></td>
+    <td><?php echo $e->getId(); ?></td>
+    <td><?php echo $e->getName(); ?></td>
     <td>
       <?php
-        #$user = $e->getOwner();
-        #echo "<a href='admin.php?user={$user->getId()}'>{$user->getNick()}</a>";
+        $user = $e->Owner();
+        echo "<a href='admin.php?user={$user->getId()}'>{$user->getNick()}</a>";
       ?>
     </td>
-    <td><?php #echo "{count($e->getAllVisitors())}"; ?></td>
-    <td><?php #echo "$e->getLocation"; ?></td>
-    <td><?php #echo "<a href='admin.php?video={$e.>getId()}'>show</a>"; ?></td>
+    <td><?php 
+	    	$c = count($e->getAllVisitors()); 
+	    	echo "$c"; 
+    	?></td>
+    <td><?php echo $e->getLocation(); ?></td>
+    <td><?php echo "<a href='admin.php?video={$e->getId()}'>show</a>"; ?></td>
   </tr>
 <?php
-#  }
+  }
 ?>
 </table>
 

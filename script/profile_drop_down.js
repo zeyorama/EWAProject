@@ -1,24 +1,30 @@
 
-function switch_cEvents() {
-	var el = document.getElementById("cEvents_content");
-	var elimg = document.getElementById("image_cEvents_content");
+function switch_img(id) {
+	var el = document.getElementById(id);
+	var elimg = document.getElementById("image_"+id);
 	if(el.style.display == "block") {
-		elimg.src = "images/plus.png";
+		elimg.src = "images/plus_hover.png";
 		el.style.display = "none";
 	} else {
-		elimg.src = "images/minus.png";
+		elimg.src = "images/minus_hover.png";
 		el.style.display = "block";
 	}
 };
 
-function switch_videos() {
-  	var el = document.getElementById("videos_content");
-	var elimg = document.getElementById("image_videos_content");
-	if(el.style.display == "block") {
+function switch_hover(test, id) {
+	var elimg = document.getElementById(id);
+	if(elimg.src.match(/images\/plus.png/) && test) {
+		elimg.src = "images/plus_hover.png";
+	} else if(elimg.src.match(/images\/minus.png/) && test) {
+		elimg.src = "images/minus_hover.png";
+	} else if(elimg.src.match(/images\/plus_hover.png/)) {
 		elimg.src = "images/plus.png";
-		el.style.display = "none";
 	} else {
 		elimg.src = "images/minus.png";
-		el.style.display = "block";
 	}
 }
+
+
+
+
+

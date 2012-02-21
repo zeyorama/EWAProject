@@ -1,10 +1,10 @@
 <?php
-#  global $db;
-#  $db->query("SELECT * FROM _user ORDER BY id;");
+  global $db;
+  $db->query("SELECT * FROM _user ORDER BY user_id;");
  
-#  while ($user = $db->get_next_result('User')) {
-#  $users[] = $user;
-#  }
+  while ($user = $db->get_next_result('User')) {
+  $users[] = $user;
+  }
 ?>
 <div id="board">
 
@@ -23,14 +23,14 @@
     <th>admin?</th>
   </tr>
 <?php
-#  foreach ($users as $u) {
+  foreach ($users as $u) {
 ?>
   <tr>
-    <td><?php #echo "$u.>getId()"; ?></td>
-    <td><?php #echo "$u.>getNick()"; ?></td>
+    <td><?php echo $u->getId(); ?></td>
+    <td><?php echo $u->getNick(); ?></td>
     <td>
     <?php
-    if (true) { #($u->isLocked()) ?>
+    if (true) { ($u->isLocked()) ?>
       <img src="images/kay.png">
     <?php } else { ?>
       <img src="images/x.png">
@@ -38,16 +38,16 @@
     </td>
     <td>
     <?php
-    if (true) { #($u->isAdmin()) ?>
+    if (true) { ($u->isAdmin()) ?>
       <img src="images/kay.png">
     <?php } else { ?>
       <img src="images/x.png">
     <?php } ?>
     </td>
-    <td><?php #echo "<a href='admin.php?user={$u.>getId()}'>show</a>"; ?></td>
+    <td><?php echo "<a href='admin.php?user={$u->getId()}'>show</a>"; ?></td>
   </tr>
 <?php
-#  }
+  }
 ?>
 </table>
 

@@ -20,7 +20,7 @@ $thisUser = $db->get_next_result('User');
   <br>
   <br>
     <div id='cEvents'>
-	    <img id ='image_cEvents_content' alt="" src="" onclick='switch_cEvents();'>
+	    <img id ='image_cEvents_content' alt="" src="" onclick='switch_img("cEvents_content");' onmouseover='switch_hover(1, "image_cEvents_content");' onmouseout='switch_hover(0, "image_cEvents_content");'>
 	    Created Events
     	<div id='cEvents_content'>
 		    <?php 
@@ -40,7 +40,7 @@ $thisUser = $db->get_next_result('User');
     </div>
     <br>
     <div id='videos'>
-	    <img id ='image_videos_content' alt="" src="" onclick='switch_videos();'>
+	    <img id ='image_videos_content' alt="" src="" onclick='switch_img("videos_content");' onmouseover='switch_hover(1, "image_videos_content");' onmouseout='switch_hover(0, "image_videos_content");'>
 	    Videos
     	<div id='videos_content'>
 		    <?php 
@@ -79,7 +79,7 @@ $thisUser = $db->get_next_result('User');
         foreach ($events as $e) {
           $event = $e->getName();
           $id = $e->getId();
-          echo "<a href='index.php?event=$id'>{$event}</a><br>";
+          echo "<a href='index.php?events=$id'>{$event}</a><br>";
         }
       } else {
         echo "No events";

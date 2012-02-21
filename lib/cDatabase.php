@@ -81,7 +81,6 @@
 				$method->invokeArgs($this->stmt, $this->array);
 				
 			} else {
-				echo "close<br>";
 				$this->stmt->close();
 				$this->stmt = NULL;
 			}
