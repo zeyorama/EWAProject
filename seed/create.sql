@@ -11,7 +11,8 @@ last_signin datetime,
 session_id varchar(64),
 locked int NOT NULL,
 PRIMARY KEY (user_id),
-UNIQUE (email, nick)
+UNIQUE (email),
+UNIQUE (nick)
 );
 
 CREATE TABLE _knowing  (

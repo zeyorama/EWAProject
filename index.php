@@ -49,6 +49,9 @@
           } else if (isset($_GET['events'])) {
             include 'partial/_event.php';
           
+          } else if (isset($_GET['register'])) {
+            include 'partial/_register.php';
+          
           } else {
             include 'partial/_index.php';
           }

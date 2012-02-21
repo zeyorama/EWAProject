@@ -23,7 +23,7 @@
     <th>admin?</th>
   </tr>
 <?php
-  foreach ($users as $u) {
+  foreach($users as $u) {
 ?>
   <tr>
     <td><?php echo $u->getId(); ?></td>

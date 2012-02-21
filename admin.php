@@ -20,19 +20,21 @@
       <font id="re2">Administrationarea</font>
       <?php
       if (signed_in()) {
-        if ( !( unserialize($_SESSION['user'])->isAdmin() ) ) {
+        if ( ( unserialize($_SESSION['user'])->isAdmin() ) ) {
           echo '<a href="logout.php"><p id="logout">Logout</p><a>';
         }
+      } else {
+        header('Location: 404.html');
       }
       ?>
       <hr>
     </div>
     
     <div id="navbar">
-      <p id="navItem"><a href="admin.php">Dashboard</a></p>
-      <p id="navItem"><a href="admin.php?users">User</a></p>
-      <p id="navItem"><a href="admin.php?videos">Video</a></p>
-      <p id="navItem"><a href="admin.php?events">Event</a></p>
+      <a href="admin.php"><p id="navItem">Dashboard</p></a>
+      <a href="admin.php?users"><p id="navItem">User</p></a>
+      <a href="admin.php?videos"><p id="navItem">Video</p></a>
+      <a href="admin.php?events"><p id="navItem">Event</p></a>
       <!--
         <a href="admin.php?item"><p id="navItem">Item</p></a>
         Here are space for more nav items!

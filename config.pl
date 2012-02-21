@@ -66,7 +66,7 @@ open(_F, ">$cf");
 
   print(_F "\$db = Database::instance();\n");
   print(_F "\$db->connect(\"$ewaUser\", \"$ewaPass\", \"ewaproject\");\n");
-  print(_F "\$gen = Generator::instance();\n");
+  print(_F "# temporally not in use\n#\$gen = Generator::instance();\n");
   print(_F "?>\n");
 close(_F);
 system('clear');
