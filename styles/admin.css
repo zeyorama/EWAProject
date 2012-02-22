@@ -1,11 +1,11 @@
 body {
   font-family: Ubuntu, Verdana, Arial, Helvetica, sans-serif;
   font-size: 0.9em;
-  background-color: #888888;
+  background-color: #888;
 }
 
 div {
-  border-radius: 8px;
+  border-radius: 50px;
 }
 
 div#head_background {
@@ -17,7 +17,7 @@ div#head_background {
 p#logout:hover {
   display: inline;
   background-color: silver;
-  border-radius: 15px;
+  border-radius: 50px;
 }
 
 p#logout {
@@ -99,4 +99,34 @@ hr#hr {
 div#login {
   text-align: right;
   border: 2px solid silver;
+}
+
+div#new {
+  float: right;
+  padding-right: 1%;
+  font-size: 2em;
+  font-weight: bold;
+  font-style: italic;
+}
+
+div#new p#navItem:hover {
+  background-color: #888;
+  border-radius: 25px;
+}
+
+div#new_User {
+  font-size: 1.3em;
+}
+
+div#new_User p {
+  font-weight: bold;
+}
+
+a#new_a {
+  font-weight: bold;
+  color: navy;
+}
+
+table tr td {
+  padding-right: 20px;
 }

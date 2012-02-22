@@ -3,7 +3,7 @@
 	/**
 	 * Function to login
 	 * @param String: User String: Password
-	 * @return true if logged in else false
+	 * @return true if logged in, otherwise false
 	 */
 	function login($user, $pass) {
 		global $db;
@@ -11,7 +11,10 @@
 		$db->exe_prepare("ss", $user, md5($pass));
 		$trigger = 0;
 		while($tmp = $db->get_next_result("User")) {
-			$u = $tmp;
+		  if ($tmp->isLocked()) {
+		    return -3;
+		  }
+		  $u = $tmp;
 			$_SESSION['user'] = serialize($u);
 			$trigger = 1;
 		}

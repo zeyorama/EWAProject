@@ -8,6 +8,10 @@
 ?>
 <div id="board">
 
+<div id="new">
+  <a href="admin.php?event&new"><p id="navItem">New Event</p></a>
+</div>
+
 <table id="info">
   <colgroup>
     <col width="75px"> <!-- id -->

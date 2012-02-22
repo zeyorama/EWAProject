@@ -12,7 +12,7 @@ if (strlen($nick) < 5) {
   header('Location: index.php?register');
   die;
 }
-if (!preg_match("([\w\-\.]+)@((\[([0-9]{1,3}\.){3}[0-9]{1,3}\])|(([\w\-]+\.)+)([a-zA-Z]{2,4}))", $email)) {
+if (!preg_match("/^[^0-9][A-z0-9_]+([.][A-z0-9_]+)*[@][A-z0-9_]+([.][A-z0-9_]+)*[.][A-z]{2,4}$/", $email)) {
   $_SESSION['err'] = 'email formate incorrect';
   header('Location: index.php?register');
   die;
@@ -41,9 +41,7 @@ if ($db->get_length() > 0) {
 
 $p = md5($pass);
 
-$db->query("INSERT INTO _user(nick,email,pass,admin,locked,created_at) VALUES('$nick','$email','$p',0,0,current_timestamp);");
-
-login($nick,$pass);
+$db->query("INSERT INTO _user(nick,email,pass,admin,locked,created_at) VALUES('$nick','$email','$p',0,1,current_timestamp);");
 
 header("Location: index.php");
 

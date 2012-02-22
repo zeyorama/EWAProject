@@ -8,6 +8,10 @@
 ?>
 <div id="board">
 
+<div id="new">
+  <a href="admin.php?video&new"><p id="navItem">New Video</p></a>
+</div>
+
 <table id="info">
   <colgroup>
     <col width="75px"> <!-- id -->

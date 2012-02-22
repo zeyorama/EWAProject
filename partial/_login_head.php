@@ -8,7 +8,7 @@
   
   if (isset($_SESSION['err'])) {
     
-    echo $_SESSION['err'];
+    echo "<font style='font-weight: bold; color: red;'>{$_SESSION['err']}</font>";
     
     unset($_SESSION['err']);
   
