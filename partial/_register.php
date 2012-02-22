@@ -1,7 +1,7 @@
 <p>
 <?php
 
-if (isset($_GET['err']))
+if (isset($_SESSION['err']))
   echo $_SESSION['err'];
   unset ($_SESSION['err']);
 ?>
