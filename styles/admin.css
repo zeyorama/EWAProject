@@ -9,7 +9,7 @@ div {
 }
 
 div#head_background {
-  height: 85px;
+  height: 90px;
   font-weight: bold;
   font-size: 3.0em;
 }
@@ -29,6 +29,7 @@ p#logout {
 }
 
 div#navbar {
+  clear: both;
   height: 40px;
   padding-left: 25px;
   padding-right: 25px;
@@ -37,12 +38,11 @@ div#navbar {
 
 p#navItem {
   display: inline;
-  margin: 10px 18px 10px 18px;
+  margin: 8px 18px 8px 18px;
   padding: 8px 12px 8px 12px ;
 }
 
 p#navItem:hover {
-  display: inline;
   background-color: silver;
   border-radius: 15px;
 }
