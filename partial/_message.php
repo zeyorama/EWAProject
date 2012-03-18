@@ -1,3 +1,4 @@
+<script type="text/javascript" src="script/profile_drop_down.js"></script>
 <?php
 	global $db, $user;
 	
@@ -61,39 +62,56 @@
 		}
 		if(count($u2) == 0) {
 			echo "<tr><td>No Messages</td></tr>";
+		} else {
+			
+			$site = $_GET['messages'];
+			
+			
+			for($i = $site*10; $i < ($site+1)*10; $i++) {
+				if(isset($u2[$i])) {
+					$u = $u2[$i];
+					$date = $u->getSendDate();
+					$from = $u->getFromUser();
+					$to = $u->getToUser();
+					$subject = $u->getSubject();
+					echo "<tr>
+									<td>
+										$date
+									</td>
+									<td>
+										<a href='index.php?profile={$from->getNick()}'>
+											{$from->getNick()}
+										</a>
+									</td>
+									<td>
+										<a href='index.php?profile={$to->getNick()}'>
+											{$to->getNick()}
+										</a>
+									</td>
+									<td>
+										<a href='index.php?messages&show={$u->getId()}'>
+											$subject
+										</a>
+									</td>
+									<td>
+										<a href='index.php?messages&delete={$u->getId()}'>"?>
+											<img src='images/minus.png' id='del' onmouseover='switch_hover(1, "del");' onmouseout='switch_hover(0, "del");'>
+										<?php echo "</a>
+									</td>
+									</tr>";
+					}
+			}
+			echo "</table>";
+			echo "< ";
+			for($i = 0; $i < count($u2) / 10; $i++) {
+				if($i == $site) {
+					echo "<font color='red'>$i</font>";
+				} else {
+					echo "<a href='?messages={$i}'>$i</a> ";
+				}
+			}
+			echo " >";
 		}
-		foreach ($u2 as $key => $u) {
-			$date = $u->getSendDate();
-			$from = $u->getFromUser();
-			$to = $u->getToUser();
-			$subject = $u->getSubject();
-			echo "<tr>
-							<td>
-							$date 
-							</td>
-							<td>
-								<a href='index.php?profile={$from->getNick()}'>
-									{$from->getNick()}
-								</a>
-							</td>
-							<td>
-								<a href='index.php?profile={$to->getNick()}'>
-									{$to->getNick()}
-								</a>
-							</td>
-							<td>
-								<a href='index.php?messages&show={$u->getId()}'>
-									$subject
-								</a>
-							</td>
-							<td>
-								<a href='index.php?messages&delete={$u->getId()}'>
-									<img src='images/minus.png'>
-								</a>
-							</td>
-						</tr>";
-		}
-		echo "</table>";
 	}
 	
 ?>

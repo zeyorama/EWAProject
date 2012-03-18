@@ -26,12 +26,29 @@ $thisUser = $db->get_next_result('User');
 		    <?php 
 		    	$cevents = $thisUser->getCreatedEvents();
 		      if ($cevents != NULL) {
-			    	foreach($cevents as $f) {
-			    		$id = $f->getID();
-			    		$name = $f->getName();
-			    		$start = $f->startDate();
-			    		echo "<div id='event$id'>$start&nbsp;<a href=index.php?events=".$id.">".$name."</a></div>";
-			    	}
+		      	if(isset($_GET['cevent'])) {
+		      		$site = $_GET['cevent'];
+		      	} else {
+		      		$site = 0;
+		      	}
+	      		for($i = $site*10; $i < ($site+1)*10; $i++) {
+	      			if(isset($cevents[$i])) {
+	      				$f = $cevents[$i];
+	      				$id = $f->getID();
+	      				$name = $f->getName();
+	      				$start = $f->startDate();
+	      				echo "<div id='event$id'>$start&nbsp;<a href=index.php?events=".$id.">".$name."</a></div>";
+	      			}
+	      		}
+	      		echo "< ";
+	      		for($i = 0; $i < count($cevents) / 10; $i++) {
+	      			if($i == $site) {
+	      				echo "<font color='red'>$i</font>";
+	      			} else {
+	      				echo "<a href='?profile={$thisUser->getNick()}&cevent={$i}'>$i</a> ";
+	      			}
+	      		}
+	      		echo " >";
 		      } else {
 		      	echo "No Created Events";
 		      }
@@ -46,15 +63,33 @@ $thisUser = $db->get_next_result('User');
 		    <?php 
 		    	$videos = $thisUser->getVideos();
 		      if ($videos != NULL) {
-			    	foreach($videos as $f) {
-			    		$id = $f->getID();
-			    		$title = $f->getTitle();
-			    		echo "<div id='video$id'><a href=index.php?video=".$id.">".$title."</a></div>";
-			    	}
+		      	if(isset($_GET['video'])) {
+		      		$site = $_GET['video'];
+		      	} else {
+		      		$site = 0;
+		      	}
+		      	for($i = $site*10; $i < ($site+1)*10; $i++) {
+		      		if(isset($videos[$i])) {
+		      			$f = $videos[$i];
+		      			$id = $f->getID();
+		      			$name = $f->getTitle();
+		      			$genre = $f->getGenre()->getGenre();
+		      			echo "<div id='event$id'>$genre&nbsp;<a href=index.php?video=".$id.">".$name."</a></div>";
+			      	}
+		      	}
+		      	echo "< ";
+		      	for($i = 0; $i < count($videos) / 10; $i++) {
+		      		if($i == $site) {
+		      			echo "<font color='red'>$i</font>";
+		      		} else {
+			      		echo "<a href='?profile={$thisUser->getNick()}&video={$i}'>$i</a> ";
+			      	}
+		      	}
+		      	echo " >";
 		      } else {
 		      	echo "No Videos";
 		      }
-		    ?>
+		      ?>
 	    </div>
     </div>
   </div>
@@ -93,10 +128,21 @@ $thisUser = $db->get_next_result('User');
    		Also the image src will be set for the plus and the minus
 		-->
     <script type="text/javascript">
-  		document.getElementById("videos_content").style.display = 'none';
-			document.getElementById("cEvents_content").style.display = 'none';
+    	<?php if(!isset($_GET['cevent'])) { ?>
+	  		document.getElementById("cEvents_content").style.display = 'none';
+				document.getElementById("image_cEvents_content").src = "images/plus.png";
+			<?php } else { ?>				
+	  		document.getElementById("cEvents_content").style.display = 'block';
+				document.getElementById("image_cEvents_content").src = "images/minus.png";
+			<?php } ?>
 
-			document.getElementById("image_cEvents_content").src = "images/plus.png";
-			document.getElementById("image_videos_content").src = "images/plus.png";
+
+	    	<?php if(!isset($_GET['video'])) { ?>
+		  		document.getElementById("videos_content").style.display = 'none';
+					document.getElementById("image_videos_content").src = "images/plus.png";
+				<?php } else { ?>				
+		  		document.getElementById("videos_content").style.display = 'block';
+					document.getElementById("image_videos_content").src = "images/minus.png";
+				<?php } ?>
 			
     </script>
