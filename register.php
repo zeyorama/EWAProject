@@ -43,6 +43,8 @@ $p = md5($pass);
 
 $db->query("INSERT INTO _user(nick,email,pass,admin,locked,created_at) VALUES('$nick','$email','$p',0,1,current_timestamp);");
 
+
+$_SESSION['register'] = 'You are now registered. Please wait for unlocking your account by an admin.';
 header("Location: index.php");
 
 ?>

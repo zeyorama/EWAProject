@@ -129,4 +129,30 @@ a#new_a {
 
 table tr td {
   padding-right: 20px;
+  padding-top: 10px;
+}
+
+table#a_user {
+  margin-left: 15px;
+  padding-left: 5px;
+  width: 400px;
+  border: 1px solid red;
+}
+
+table#a_user tr th {
+  text-align: left;
+}
+
+div#leftItem_table {
+  float: left;
+  
+}
+
+div#rightItem {
+  margin-left: 420px;
+  padding-left: 5px;
+}
+
+div#clearer {
+  clear: both;
 }

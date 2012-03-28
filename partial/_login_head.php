@@ -14,6 +14,13 @@
   
   }
   
+  if (isset($_SESSION['register'])) {
+    
+    echo "<font style='font-weight: bold; color: navy;'>{$_SESSION['register']}</font>";
+    
+    unset($_SESSION['register']);
+  }
+  
 ?>    
     <input size="10" value="username" name="nick" type="text" id="txt">
     <input size="10" value="password" name="pass" type="password" id="txt">

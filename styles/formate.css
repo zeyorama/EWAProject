@@ -39,22 +39,6 @@ a#a {
   color: black;
 }
 
-div#naviBorder1 {
-  padding-left: 5px;
-  width: 195px;
-  background-color: darken(gray, 30%);
-  border: 1px solid silver;
-  font-weight: bold;
-  color: white;
-}
-
-div#naviBorder2 {
-  padding-left: 5px;
-  margin-bottom: 5px;
-  border: 1px solid silver;
-  width: 195px;
-}
-
 div#yielded {
   margin-left: 200px;
   padding-left: 10px;

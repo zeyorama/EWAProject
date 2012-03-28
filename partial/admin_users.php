@@ -23,7 +23,7 @@
   <tr>
     <th>id</th>
     <th>username</th>
-    <th>state</th>
+    <th>access</th>
     <th>admin?</th>
   </tr>
 <?php
@@ -34,7 +34,7 @@
     <td><?php echo $u->getNick(); ?></td>
     <td>
     <?php
-    if (true) { ($u->isLocked()) ?>
+    if (!$u->isLocked()) { ?>
       <img src="images/kay.png">
     <?php } else { ?>
       <img src="images/x.png">
@@ -42,13 +42,14 @@
     </td>
     <td>
     <?php
-    if (true) { ($u->isAdmin()) ?>
+    if ($u->isAdmin()) { ?>
       <img src="images/kay.png">
     <?php } else { ?>
       <img src="images/x.png">
     <?php } ?>
     </td>
-    <td><?php echo "<a href='admin.php?user={$u->getId()}'>show</a>"; ?></td>
+    <td><?php echo "<a href='admin.php?user={$u->getId()}'>show</a>"; ?>
+    <?php if (!$u->isAdmin()) echo "<a href='adminWorks.php?deleteUser={$u->getId()}'>delete</a>"; ?> </td>
   </tr>
 <?php
   }

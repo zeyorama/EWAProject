@@ -18,8 +18,10 @@ TH Mittelhessen
 MNI
 
 Martin Karry M.Sc.
+
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Systemspecification:
 PHP.... v.5.3.10
+  mysqli-extension activated 
 MySQL.. v.5.1
