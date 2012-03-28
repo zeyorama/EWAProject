@@ -28,36 +28,40 @@
         </noscript>
         <p>
         <?php
+          
           if (isset($_GET['impress'])) {
             include 'partial/_impress.html';
           
-          } else if (isset($_GET['profile'])) {
-            include 'partial/_profile.php';
+          } else if ($_SESSION['user'] != NULL) {
+            if (isset($_GET['profile'])) {
+              include 'partial/_profile.php';
+              
+            } else if (isset($_GET['profiles'])) {
+              include 'partial/_profiles.php';
+              
+            } else if (isset($_GET['new_event'])) {
+              include 'partial/_new_event.php';
+              
+            } else if (isset($_GET['new_message'])) {
+              include 'partial/_new_message.php';
+              
+            } else if (isset($_GET['messages'])) {
+              include 'partial/_message.php';
+              
+            } else if (isset($_GET['events'])) {
+              include 'partial/_event.php';
             
-          } else if (isset($_GET['profiles'])) {
-            include 'partial/_profiles.php';
+            } else if (isset($_GET['register'])) {
+              include 'partial/_register.php';
             
-          } else if (isset($_GET['new_event'])) {
-            include 'partial/_new_event.php';
+            } else if (isset($_GET['video'])) {
+              include 'partial/_video.php';
             
-          } else if (isset($_GET['new_message'])) {
-            include 'partial/_new_message.php';
-            
-          } else if (isset($_GET['messages'])) {
-            include 'partial/_message.php';
-            
-          } else if (isset($_GET['events'])) {
-            include 'partial/_event.php';
-          
-          } else if (isset($_GET['register'])) {
-            include 'partial/_register.php';
-          
-          } else if (isset($_GET['video'])) {
-            include 'partial/_video.php';
-          
-          } else if (isset($_GET['add_video'])) {
-            include 'partial/_add_video.php';
-          
+            } else if (isset($_GET['add_video'])) {
+              include 'partial/_add_video.php';
+            } else {
+              include 'partial/_index.php';
+            }
           } else {
             include 'partial/_index.php';
           }
