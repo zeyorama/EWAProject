@@ -48,17 +48,23 @@ open(_F, ">seed/user.sql");
   my $adminPass = <STDIN>;
   print("Email adress for Admin:");
   my $adminEmail = <STDIN>;
-  print "Admin will be created with\n\t$adminUser → $adminPass\n";
-  print(_F "INSERT INTO _user(id,nick,pass,email,created_at,admin,locked)\n");
+  print "Admin will be created with\n\t$adminUser -> $adminPass\n";
+  print(_F "USE ewaproject;\n");
+  print(_F "INSERT INTO _user(user_id,nick,pass,email,created_at,admin,locked)\n");
   print(_F "VALUES (1,'$adminUser',md5('$adminPass'),'$adminEmail',current_timestamp,1,0);");
 close(_F);
 
 print("\n\nNice. Now the user and the Database will be etablished!\n");
 
-system("mysql -u $dbRoot -p$dbPass <seed/db.sql");
+system("mysql -u $dbRoot -p$dbPass <seed/clear.sql");
 system("mysql -u $dbRoot -p$dbPass <seed/create.sql");
+system("mysql -u $dbRoot -p$dbPass <seed/db.sql");
 system("mysql -u $dbRoot -p$dbPass <seed/std_input.sql");
 system("mysql -u $dbRoot -p$dbPass <seed/user.sql");
+
+system("sleep 2");
+system("rm seed/user.sql");
+system("rm seed/db.sql");
 
 # config file
 $cf = 'config.php';

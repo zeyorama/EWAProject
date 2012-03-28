@@ -1,3 +1,5 @@
+CREATE DATABASE ewaproject;
+
 USE ewaproject;
 
 CREATE TABLE _user  (
@@ -41,6 +43,7 @@ duration smallint,
 genre_id int,
 FSK tinyint,
 release_year year,
+locked boolean,
 PRIMARY KEY (video_id)
 );
 

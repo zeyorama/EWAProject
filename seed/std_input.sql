@@ -24,15 +24,15 @@ VALUES (9,'Western');
 INSERT INTO _genre (genre_id, name)
 VALUES (10,'undef');
 
-INSERT INTO _video (title,duration,genre_id,FSK,release_year)
-VALUES ('Clerks',92,2,12,1994);
-INSERT INTO _video (title,duration,genre_id,FSK,release_year)
-VALUES ('Stargate',116,5,12,1994);
-INSERT INTO _video (title,duration,genre_id,FSK,release_year)
-VALUES ('Forest Gumb',136,10,12,1994);
-INSERT INTO _video (title,duration,genre_id,FSK,release_year)
-VALUES ('The Passion of the Christ',127,10,16,2004);
-INSERT INTO _video (title,duration,genre_id,FSK,release_year)
-VALUES ('The Simpsons Movie',83,2,6,2007);
-INSERT INTO _video (title,duration,genre_id,FSK,release_year)
-VALUES ('Titanic',194,7,12,1997);
+INSERT INTO _video (title,duration,genre_id,FSK,release_year,locked)
+VALUES ('Clerks',92,2,12,1994,0);
+INSERT INTO _video (title,duration,genre_id,FSK,release_year,locked)
+VALUES ('Stargate',116,5,12,1994,0);
+INSERT INTO _video (title,duration,genre_id,FSK,release_year,locked)
+VALUES ('Forest Gumb',136,10,12,1994,0);
+INSERT INTO _video (title,duration,genre_id,FSK,release_year,locked)
+VALUES ('The Passion of the Christ',127,10,16,2004,0);
+INSERT INTO _video (title,duration,genre_id,FSK,release_year,locked)
+VALUES ('The Simpsons Movie',83,2,6,2007,0);
+INSERT INTO _video (title,duration,genre_id,FSK,release_year,locked)
+VALUES ('Titanic',194,7,12,1997,0);

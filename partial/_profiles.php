@@ -2,6 +2,7 @@
   global $db;
   $db->query("SELECT * FROM _user ORDER BY nick;");
  
+  $users = array();
   
   while ($user = $db->get_next_result('User')) {
     $users[] = $user;
