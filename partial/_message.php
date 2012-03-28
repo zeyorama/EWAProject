@@ -61,7 +61,7 @@
 			$u2[] = $tmp;
 		}
 		if(count($u2) == 0) {
-			echo "<tr><td>No Messages</td></tr>";
+			echo "<tr><td>No Messages</td></tr>\n</table>";
 		} else {
 			
 			$site = $_GET['messages'];

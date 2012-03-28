@@ -41,10 +41,24 @@ open(_F, ">seed/db.sql");
   print(_F "$userCreate");
 close(_F);
 
+open(_F, ">seed/user.sql");
+  print("Type your admin user [admin]:");
+  my $adminUser = <STDIN>;
+  print("Now the password for $adminUser [EWAPASS]:");
+  my $adminPass = <STDIN>;
+  print("Email adress for Admin:");
+  my $adminEmail = <STDIN>;
+  print "Admin will be created with\n\t$adminUser → $adminPass\n";
+  print(_F "INSERT INTO _user(id,nick,pass,email,created_at,admin,locked)\n");
+  print(_F "VALUES (1,'$adminUser',md5('$adminPass'),'$adminEmail',current_timestamp,1,0);");
+close(_F);
+
 print("\n\nNice. Now the user and the Database will be etablished!\n");
 
 system("mysql -u $dbRoot -p$dbPass <seed/db.sql");
 system("mysql -u $dbRoot -p$dbPass <seed/create.sql");
+system("mysql -u $dbRoot -p$dbPass <seed/std_input.sql");
+system("mysql -u $dbRoot -p$dbPass <seed/user.sql");
 
 # config file
 $cf = 'config.php';
@@ -57,6 +71,7 @@ open(_F, ">$cf");
   print(_F "<?php\n");
 
   print(_F "include_once 'lib/cDatabase.php';\n");
+  print(_F "include_once 'lib/cMessage.php';\n");
   print(_F "include_once 'lib/cGenerator.php';\n");
   print(_F "include_once 'lib/cGenre.php';\n");
   print(_F "include_once 'lib/cUser.php';\n");

@@ -1,9 +1,11 @@
 <?php
   global $db;
   $db->query("SELECT * FROM _event ORDER BY event_id;");
- 
+  
+  $events = array();
+  
   while ($event = $db->get_next_result('Event')) {
-  $events[] = $event;
+    $events = $event;
   }
 ?>
 <div id="board">
