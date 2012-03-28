@@ -2,12 +2,28 @@
 global $db;
 $db->query("SELECT * FROM _user WHERE nick='{$_GET['profile']}' LIMIT 1;");
 $thisUser = $db->get_next_result('User');
+
+$nick = unserialize($_SESSION['user'])->getNick();
+$id = unserialize($_SESSION['user'])->getId();
+
+if(isset($_GET['vid'])) {
+	$video = $_GET['vid'];
+	$db->prepare("DELETE FROM _user_video WHERE user_id = ? AND video_id = ?");
+	$db->exe_prepare("ss", $id, $video);
+}
+
+if(isset($_GET['event'])) {
+	/*
+	 * 
+	 */
+}
+
 ?>
 <script type="text/javascript" src="script/profile_drop_down.js"></script>
 <div id="profile">
 
   <h2><?php
-    if ($thisUser->getNick() == unserialize($_SESSION['user'])->getNick()) {
+    if ($thisUser->getNick() == $nick) {
       echo 'My';
     } else {
       echo "{$thisUser->getNick()}s";
@@ -36,16 +52,23 @@ $thisUser = $db->get_next_result('User');
 		      	} else {
 		      		$site = 0;
 		      	}
+		      	echo "<table width='500px'>";
 	      		for($i = $site*10; $i < ($site+1)*10; $i++) {
 	      			if(isset($cevents[$i])) {
 	      				$f = $cevents[$i];
 	      				$id = $f->getID();
 	      				$name = $f->getName();
 	      				$start = $f->startDate();
-	      				echo "<div id='event$id'>$start&nbsp;<a href=index.php?events=".$id.">".$name."</a></div>";
+	      				echo "<tr id='event$id'><td>$start</td><td><a href=index.php?events=".$id.">".$name."</a></td>";
+								?> 
+								<td>
+								<a href="?profile=<?php echo $thisUser->getNick(); ?>&event=<?php echo $id;?>"><img src='images/minus.png' id='del<?php echo "$id" ?>' onmouseover='switch_hover(1, "del<?php echo "$id" ?>");' onmouseout='switch_hover(0, "del<?php echo "$id" ?>");'> </a> 
+								</td>
+								<?php
+	      				echo "</tr>";
 	      			}
 	      		}
-	      		echo "< ";
+	      		echo "</table>< ";
 	      		for($i = 0; $i < count($cevents) / 10; $i++) {
 	      			if($i == $site) {
 	      				echo "<font color='red'>$i</font>";
@@ -78,16 +101,20 @@ $thisUser = $db->get_next_result('User');
 		      	} else {
 		      		$site = 0;
 		      	}
+		      	echo "<table width='500px'>";
 		      	for($i = $site*10; $i < ($site+1)*10; $i++) {
 		      		if(isset($videos[$i])) {
 		      			$f = $videos[$i];
 		      			$id = $f->getID();
 		      			$name = $f->getTitle();
 		      			$genre = $f->getGenre()->getGenre();
-		      			echo "<div id='event$id'>$genre&nbsp;<a href=index.php?video=".$id.">".$name."</a></div>";
+		      			echo "<tr id='event$id'><td>$genre</td><td><a href=index.php?video=".$id.">".$name."</a></td><td>";
+		      			?> <a href="?profile=<?php echo $thisUser->getNick(); ?>&vid=<?php echo $id;?>"> <img src='images/minus.png' id='del2<?php echo "$id" ?>' onmouseover='switch_hover(1, "del2<?php echo "$id" ?>");' onmouseout='switch_hover(0, "del2<?php echo "$id" ?>");'></a> <?php
+	      				
+		      			echo "</td></tr>";
 			      	}
 		      	}
-		      	echo "< ";
+		      	echo "</table>< ";
 		      	for($i = 0; $i < count($videos) / 10; $i++) {
 		      		if($i == $site) {
 		      			echo "<font color='red'>$i</font>";
