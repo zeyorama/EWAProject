@@ -2,6 +2,10 @@
 
 	include_once 'iDatabase.php';
 	
+	/*
+	 * SQL Anweisung gehen nicht während prepared statements gefetched werden
+	 */
+	
 	/**
 	 * @author Markus Benjmain Kretsch
 	 */
