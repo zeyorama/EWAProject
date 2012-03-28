@@ -6,12 +6,12 @@ include 'epic.php';
 $login = login($_POST['nick'], $_POST['pass']);
 
 # controll if login failed or not
-if (!$login) {
+if ($login === 0) {
   $_SESSION['err'] = 'username or password incorrect, please try again!';
   header('Location: index.php');
 }
 
-if ($login == -3) {
+if ($login === -3) {
   $_SESSION['err'] = 'you are currently locked, please wait for unlock or contact an admin!';
   header('Location: index.php');
 }

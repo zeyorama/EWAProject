@@ -21,9 +21,9 @@
 		if($trigger === 1) {
 		  $u->setSessionId(session_id());
 			$u->setlastSignIn(date('Y-m-d H:i:s'));
-			return true;
+			return 1;
 		}
-		return false;
+		return 0;
 	}
 
 	/**

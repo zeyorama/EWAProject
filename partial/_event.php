@@ -61,7 +61,7 @@
 			 */
 			if($v = $e->getVideos()) {
 				foreach ($v as $key => $value) {
-					echo $value->getName();
+					echo "<a href='?video={$value->getId()}'>{$value->getTitle()}</a>";
 				}
 			} else {
 				echo "no Videos set";

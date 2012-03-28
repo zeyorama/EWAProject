@@ -13,9 +13,9 @@ if(isset($_GET['vid'])) {
 }
 
 if(isset($_GET['event'])) {
-	/*
-	 * 
-	 */
+	$video = $_GET['event'];
+	$db->prepare("DELETE FROM _event_video WHERE ue_id = ? AND video_id = ?");
+	$db->exe_prepare("ss", $id, $video);
 }
 
 ?>
