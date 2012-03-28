@@ -35,6 +35,7 @@
 				</div>
 			";
 		} else {
+			while($db->get_next_result("Message"));
 			echo "Cannot Show Message";
 		}
 	} else if(isset($_GET['delete'])) {

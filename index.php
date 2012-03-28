@@ -43,7 +43,7 @@
           } else if (isset($_GET['new_message'])) {
             include 'partial/_new_message.php';
             
-          }else if (isset($_GET['messages'])) {
+          } else if (isset($_GET['messages'])) {
             include 'partial/_message.php';
             
           } else if (isset($_GET['events'])) {
@@ -51,6 +51,12 @@
           
           } else if (isset($_GET['register'])) {
             include 'partial/_register.php';
+          
+          } else if (isset($_GET['video'])) {
+            include 'partial/_video.php';
+          
+          } else if (isset($_GET['add_video'])) {
+            include 'partial/_add_video.php';
           
           } else {
             include 'partial/_index.php';

@@ -22,6 +22,11 @@ $thisUser = $db->get_next_result('User');
     <div id='cEvents'>
 	    <img id ='image_cEvents_content' alt="" src="" onclick='switch_img("cEvents_content");' onmouseover='switch_hover(1, "image_cEvents_content");' onmouseout='switch_hover(0, "image_cEvents_content");'>
 	    Created Events
+	    <?php 
+	    	if($thisUser->getNick() == unserialize($_SESSION['user'])->getNick()) {
+	    		echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='?new_event'>Add Event</a>";
+	    	}
+    	?>
     	<div id='cEvents_content'>
 		    <?php 
 		    	$cevents = $thisUser->getCreatedEvents();
@@ -59,6 +64,11 @@ $thisUser = $db->get_next_result('User');
     <div id='videos'>
 	    <img id ='image_videos_content' alt="" src="" onclick='switch_img("videos_content");' onmouseover='switch_hover(1, "image_videos_content");' onmouseout='switch_hover(0, "image_videos_content");'>
 	    Videos
+    	<?php
+	    	if($thisUser->getNick() == unserialize($_SESSION['user'])->getNick()) {
+	    		echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='?add_video'>Add Video</a>";
+	    	}
+	    ?>
     	<div id='videos_content'>
 		    <?php 
 		    	$videos = $thisUser->getVideos();
@@ -136,13 +146,12 @@ $thisUser = $db->get_next_result('User');
 				document.getElementById("image_cEvents_content").src = "images/minus.png";
 			<?php } ?>
 
-
-	    	<?php if(!isset($_GET['video'])) { ?>
-		  		document.getElementById("videos_content").style.display = 'none';
-					document.getElementById("image_videos_content").src = "images/plus.png";
-				<?php } else { ?>				
-		  		document.getElementById("videos_content").style.display = 'block';
-					document.getElementById("image_videos_content").src = "images/minus.png";
-				<?php } ?>
+    	<?php if(!isset($_GET['video'])) { ?>
+	  		document.getElementById("videos_content").style.display = 'none';
+				document.getElementById("image_videos_content").src = "images/plus.png";
+			<?php } else { ?>				
+	  		document.getElementById("videos_content").style.display = 'block';
+				document.getElementById("image_videos_content").src = "images/minus.png";
+			<?php } ?>
 			
     </script>
