@@ -28,7 +28,13 @@ if(isset($_GET['event'])) {
     } else {
       echo "{$thisUser->getNick()}s";
     }
+    	$friends = $thisUser->getFriends();
   ?> profile</h2>
+  <?php 
+  	/*if(in_array($thisUser, $friends)) {
+  		echo "asdasd";
+  	}*/
+  ?>
   Bei Stromausfall ist die beste Gelegenheit mit Ihrem Föhn zu baden!
   <hr id="profile"><br>
   <div id="profile_content">
@@ -133,7 +139,6 @@ if(isset($_GET['event'])) {
   <div id="profile_infos">
     <b>Friends</b><br>
     <?php 
-    	$friends = $thisUser->getFriends();
       if ($friends != NULL) {
 	    	foreach($friends as $f) {
 	    		$nick = $f->getNick();

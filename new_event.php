@@ -7,7 +7,7 @@
   $location = $_POST['location'];
   $start = $_POST['start'];
   
-  if ($loaction == "") {
+  if ($location == "") {
     $location = "undef";
   }
   

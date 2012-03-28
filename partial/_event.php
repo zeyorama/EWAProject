@@ -47,6 +47,8 @@
 				echo "{$e->startDate()} Das Event hat schon begonnen spute dich. ;)";
 			}
 			echo "<br>";
+			echo "<b>Creator: </b>{$e->Owner()->getNick()}";
+			echo "<br>";
 			echo "<b>Location: </b>{$e->getLocation()}";
 			echo "<br>";
 			echo "<b>Description: </b>{$e->getDescription()}";
