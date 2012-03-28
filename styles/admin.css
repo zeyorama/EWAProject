@@ -130,6 +130,7 @@ a#new_a {
 table tr td {
   padding-right: 20px;
   padding-top: 10px;
+  vertical-align: top;
 }
 
 table#a_user {
@@ -145,7 +146,6 @@ table#a_user tr th {
 
 div#leftItem_table {
   float: left;
-  
 }
 
 div#rightItem {
@@ -155,4 +155,8 @@ div#rightItem {
 
 div#clearer {
   clear: both;
+}
+
+table { 
+  vertical-align: top;
 }
