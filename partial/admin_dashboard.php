@@ -57,14 +57,14 @@
           </colgroup>
           <tr align="left">
             <th>name</th>
-            <th>created at</th>
+            <th>release date</th>
           </tr>
 <?php
   while ($tmp = $db->get_next_result('Video')) {
 ?>
             <tr>
               <td><?php echo "<a href='admin.php?video={$tmp->getId()}'>{$tmp->getName()}</a>"; ?></td>
-              <td><?php echo $tmp->createdAt(); ?></td>
+              <td><?php echo $tmp->getRelease(); ?></td>
               <td><a id="new_a" href="admin.php?user=<?php echo $tmp->getId(); ?>">show</a>&nbsp;
               <a id="new_a" href="unlock.php?v=<?php echo $tmp->getId(); ?>">unlock</a>&nbsp;
               <a id="new_a" href="adminWorks.php?delete&vid=<?php echo $tmp->getId(); ?>">delete</a></td>
@@ -85,20 +85,20 @@
 ?>
         <table>
           <colgroup>
-            <col>
-            <col>
-            <col>
+            <col width="150px">
+            <col width="50px">
+            <col width="100px">
           </colgroup>
           <tr align="left">
             <th>name</th>
-            <th>created at</th>
+            <th>start date</th>
           </tr>
 <?php
   while ($tmp = $db->get_next_result('Event')) {
 ?>
             <tr>
               <td><?php echo "<a href='admin.php?event={$tmp->getId()}'>{$tmp->getName()}</a>"; ?></td>
-              <td><?php echo $tmp->createdAt(); ?></td>
+              <td><?php echo $tmp->startDate(); ?></td>
               <td><a id="new_a" href="admin.php?event=<?php echo $tmp->getId(); ?>">show</a>&nbsp;
               <a id="new_a" href="unlock.php?e=<?php echo $tmp->getId(); ?>">unlock</a>&nbsp;
               <a id="new_a" href="adminWorks.php?delete&eid=<?php echo $tmp->getId(); ?>">delete</a></td>

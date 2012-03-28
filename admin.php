@@ -43,7 +43,7 @@
     
     <div id="dashboard">
       <noscript>
-        Please activate JavaScript for full functionallity!
+        <strong>Please activate JavaScript for full functionallity!</strong>
       </noscript>
 <?php
 
@@ -73,9 +73,6 @@
 ?>
     </div>
     
-    <div id="footer">
-      <a href="index.php?impress" id="impress">Impressum</a>
-      <br><br><br>
-    </div>
+    <div id="footer"><br><br><br>created and &copy; by Frank Kevin Zey &amp; Markus Benjamin Kretsch</div>
   </body>
 </html>

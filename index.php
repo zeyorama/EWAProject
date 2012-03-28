@@ -73,8 +73,8 @@
       
     </div>
     
-    <div id="footer">
-      <br><br><br>
+    <div id="footer"><br><br><br>created and &copy; by Frank Kevin Zey &amp; Markus Benjamin Kretsch
+      <br>
       <a href="index.php?impress">Impressum</a>
     </div>
   </body>
