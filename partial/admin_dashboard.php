@@ -10,7 +10,7 @@
     <tr>
       <td>
 <?php
-  $db->query('SELECT * FROM _user WHERE locked=1;');
+  $db->query('SELECT * FROM _user ORDER BY locked DESC LIMIT 5;');
   
   if ($db->get_length() >= 1) {
     echo '<p>New users registered</p>';
@@ -29,10 +29,13 @@
   while ($tmp = $db->get_next_result('User')) {
 ?>
             <tr>
-              <td><?php echo "<a href='admin.php?user={$tmp->getId()}'>{$tmp->getNick()}</a>"; ?></td>
+              <td><a <?php if ($tmp->isAdmin()) { echo "id='admin_link_especial'"; } ?> href="admin.php?user=
+              <?php echo $tmp->getId()?>"><?php echo $tmp->getNick() ?></a></td>
               <td><?php echo $tmp->registeredAt(); ?></td>
               <td><a id="new_a" href="admin.php?user=<?php echo $tmp->getId(); ?>">show</a>&nbsp;
-              <a id="new_a" href="unlock.php?u=<?php echo $tmp->getId(); ?>">unlock</a>&nbsp;
+              <?php if ($tmp->isLocked()) { ?>
+                <a id="new_a" href="unlock.php?u=<?php echo $tmp->getId(); ?>">unlock</a>&nbsp;
+              <?php } ?>
               <a id="new_a" href="adminWorks.php?delete&uid=<?php echo $tmp->getId(); ?>">delete</a></td>
             </tr>
 <?php
@@ -44,7 +47,7 @@
 ?>
       <td>
 <?php
-  $db->query('SELECT * FROM _video WHERE locked=1;');
+  $db->query('SELECT * FROM _video ORDER BY video_id DESC LIMIT 5;');
   
   if ($db->get_length() >= 1) {
     echo '<p>New videos created</p>';
@@ -63,10 +66,9 @@
   while ($tmp = $db->get_next_result('Video')) {
 ?>
             <tr>
-              <td><?php echo "<a href='admin.php?video={$tmp->getId()}'>{$tmp->getName()}</a>"; ?></td>
+              <td><?php echo "<a href='admin.php?video={$tmp->getId()}'>{$tmp->getTitle()}</a>"; ?></td>
               <td><?php echo $tmp->getRelease(); ?></td>
               <td><a id="new_a" href="admin.php?user=<?php echo $tmp->getId(); ?>">show</a>&nbsp;
-              <a id="new_a" href="unlock.php?v=<?php echo $tmp->getId(); ?>">unlock</a>&nbsp;
               <a id="new_a" href="adminWorks.php?delete&vid=<?php echo $tmp->getId(); ?>">delete</a></td>
             </tr>
 <?php
@@ -78,7 +80,7 @@
 ?>
       <td>
 <?php
-  $db->query('SELECT * FROM _event WHERE locked=1;');
+  $db->query('SELECT * FROM _event ORDER BY event_id DESC LIMIT 5;');
   
   if ($db->get_length() >= 1) {
     echo '<p>New events created</p>';
@@ -100,7 +102,6 @@
               <td><?php echo "<a href='admin.php?event={$tmp->getId()}'>{$tmp->getName()}</a>"; ?></td>
               <td><?php echo $tmp->startDate(); ?></td>
               <td><a id="new_a" href="admin.php?event=<?php echo $tmp->getId(); ?>">show</a>&nbsp;
-              <a id="new_a" href="unlock.php?e=<?php echo $tmp->getId(); ?>">unlock</a>&nbsp;
               <a id="new_a" href="adminWorks.php?delete&eid=<?php echo $tmp->getId(); ?>">delete</a></td>
             </tr>
 <?php

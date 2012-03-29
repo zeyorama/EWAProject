@@ -3,9 +3,10 @@
   $db->query("SELECT * FROM _event ORDER BY event_id;");
   
   $events = array();
+  $i = 0;
   
   while ($event = $db->get_next_result('Event')) {
-    $events = $event;
+    $events[$i++] = $event;
   }
 ?>
 <div id="board">
@@ -47,7 +48,7 @@
 	    	echo "$c"; 
     	?></td>
     <td><?php echo $e->getLocation(); ?></td>
-    <td><?php echo "<a href='admin.php?video={$e->getId()}'>show</a>"; ?></td>
+    <td><?php echo "<a href='admin.php?event={$e->getId()}'>show</a>"; ?></td>
   </tr>
 <?php
   }

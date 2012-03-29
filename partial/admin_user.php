@@ -8,7 +8,7 @@
 <div id="board">
 
 <div id="leftItem_table">
-  <table id="a_user">
+  <table id="a">
     <colgroup>
       <col width="120px">
       <col>
@@ -73,6 +73,11 @@
     <input type="submit" value="change Lock">
   </form>
   <?php } ?>
+  <form action="adminWorks.php" method="POST">
+    <input type="hidden" name="uid" value="<?php echo $a_user->getId(); ?>">
+    <input type="hidden" name="session">
+    <input type="submit" value="delete session">
+  </form>
 </div>
 <div id=clearer></div>
 </div>
