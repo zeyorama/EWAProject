@@ -48,17 +48,21 @@ if(isset($_GET['unconnect'])) {
   ?> profile</h2>
   <?php 
   
-  	$toogle = 0;
+  	$toggle = 0;
   	
   	if($friends != NULL) {
 	  	foreach($friends as $value) {
-	  		if(($id == $value->getId()) || ($thisUser->getId() == $id)) {
-	  			$toogle = 1;
+	  		if($id == $value->getId()) {
+	  			$toggle = 1;
 	  		}
 	  	}
   	}
+  	
+  	if($thisUser->getId() == $id) {
+  		$toggle = 1;
+  	}
   
-  	if($toogle == 1) {
+  	if($toggle == 1) {
   		if(($thisUser->getId() != $id)) {
   			echo "<a href='?profile={$thisUser->getNick()}&unconnect={$thisUser->getId()}'>Unconnect</a><br>";
   		}
@@ -95,9 +99,15 @@ if(isset($_GET['unconnect'])) {
 	      				$start = $f->startDate();
 	      				echo "<tr id='event$id'><td>$start</td><td><a href=index.php?events=".$id.">".$name."</a></td>";
 								?> 
+								
 								<td>
 								<a href="?profile=<?php echo $thisUser->getNick(); ?>&event=<?php echo $id;?>"><img src='images/minus.png' id='del<?php echo "$id" ?>' onmouseover='switch_hover(1, "del<?php echo "$id" ?>");' onmouseout='switch_hover(0, "del<?php echo "$id" ?>");'> </a> 
 								</td>
+								
+								<td>
+								<a href="?profile=<?php echo $thisUser->getNick(); ?>&edit=<?php echo $id;?>"><img src='images/edit.png' id='edit<?php echo "$id" ?>' onmouseover='switch_hover_edit(1, "edit<?php echo "$id" ?>");' onmouseout='switch_hover_edit(0, "edit<?php echo "$id" ?>");'> </a> 
+								</td>
+								
 								<?php
 	      				echo "</tr>";
 	      			}
@@ -144,7 +154,6 @@ if(isset($_GET['unconnect'])) {
 		      			$genre = $f->getGenre()->getGenre();
 		      			echo "<tr id='event$id'><td>$genre</td><td><a href=index.php?video=".$id.">".$name."</a></td><td>";
 		      			?> <a href="?profile=<?php echo $thisUser->getNick(); ?>&vid=<?php echo $id;?>"> <img src='images/minus.png' id='del2<?php echo "$id" ?>' onmouseover='switch_hover(1, "del2<?php echo "$id" ?>");' onmouseout='switch_hover(0, "del2<?php echo "$id" ?>");'></a> <?php
-	      				
 		      			echo "</td></tr>";
 			      	}
 		      	}

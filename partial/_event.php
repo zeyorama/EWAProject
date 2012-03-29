@@ -113,10 +113,10 @@
 	    foreach($e as $value) {
 	    	$sum = count($value->getAllVisitors());
 	      echo "<tr>
-	        <th>{$value->getName()}</th>
+	        <th><a href=?events={$value->getId()}>{$value->getName()}</a></th>
 	        <th>{$value->getLocation()}</th>
 	        <th>{$value->startDate()}</th>
-	        <th>{$value->Owner()->getNick()}</th>
+	        <th><a href=?profile={$value->Owner()->getNick()} >{$value->Owner()->getNick()}</a></th>
 	        <th>$sum</th>
 	        <th>"; ?>
 	        	<a href="?events=<?php echo $value->getId(); ?>&add">
