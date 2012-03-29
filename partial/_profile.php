@@ -8,14 +8,30 @@ $id = unserialize($_SESSION['user'])->getId();
 
 if(isset($_GET['vid'])) {
 	$video = $_GET['vid'];
-	$db->prepare("DELETE FROM _user_video WHERE user_id = ? AND video_id = ?");
+	$db->prepare("DELETE FROM _user_video WHERE user_id = ? AND video_id = ?;");
 	$db->exe_prepare("ss", $id, $video);
 }
 
 if(isset($_GET['event'])) {
-	/*
-	 * 
-	 */
+	$video = $_GET['event'];
+	$db->prepare("DELETE FROM _event_video WHERE ue_id = ? AND video_id = ?;");
+	$db->exe_prepare("ss", $id, $video);
+}
+
+if(isset($_GET['connect'])) {
+	if(signed_in()) {
+		$db->prepare("INSERT INTO _knowing (user_id1, user_id2) VALUES(?, ?);");
+		$db->exe_prepare("ss", $id, $thisUser->getId());
+	}
+}
+
+if(isset($_GET['unconnect'])) {
+	if(signed_in()) {
+		$db->prepare("DELETE FROM _knowing WHERE user_id1 = ? AND user_id2 = ?;");
+		$db->exe_prepare("ss", $id, $thisUser->getId());
+		$db->prepare("DELETE FROM _knowing WHERE user_id1 = ? AND user_id2 = ?;");
+		$db->exe_prepare("ss", $thisUser->getId(), $id);
+	}
 }
 
 ?>
@@ -28,7 +44,29 @@ if(isset($_GET['event'])) {
     } else {
       echo "{$thisUser->getNick()}s";
     }
+    $friends = $thisUser->getFriends();
   ?> profile</h2>
+  <?php 
+  
+  	$toggle = 0;
+  	
+  	if($friends != NULL) {
+	  	foreach($friends as $value) {
+	  		if($id == $value->getId()) {
+	  			$toggle = 1;
+	  		}
+	  	}
+  	}
+  	
+  	if($thisUser->getId() == $id) {
+  		$toggle = 1;
+  	}
+  
+  	if($toggle == 1) {
+  		if(($thisUser->getId() != $id)) {
+  			echo "<a href='?profile={$thisUser->getNick()}&unconnect={$thisUser->getId()}'>Unconnect</a><br>";
+  		}
+  ?>
   Bei Stromausfall ist die beste Gelegenheit mit Ihrem Föhn zu baden!
   <hr id="profile"><br>
   <div id="profile_content">
@@ -61,9 +99,15 @@ if(isset($_GET['event'])) {
 	      				$start = $f->startDate();
 	      				echo "<tr id='event$id'><td>$start</td><td><a href=index.php?events=".$id.">".$name."</a></td>";
 								?> 
+								
 								<td>
 								<a href="?profile=<?php echo $thisUser->getNick(); ?>&event=<?php echo $id;?>"><img src='images/minus.png' id='del<?php echo "$id" ?>' onmouseover='switch_hover(1, "del<?php echo "$id" ?>");' onmouseout='switch_hover(0, "del<?php echo "$id" ?>");'> </a> 
 								</td>
+								
+								<td>
+								<a href="?profile=<?php echo $thisUser->getNick(); ?>&edit=<?php echo $id;?>"><img src='images/edit.png' id='edit<?php echo "$id" ?>' onmouseover='switch_hover_edit(1, "edit<?php echo "$id" ?>");' onmouseout='switch_hover_edit(0, "edit<?php echo "$id" ?>");'> </a> 
+								</td>
+								
 								<?php
 	      				echo "</tr>";
 	      			}
@@ -110,7 +154,6 @@ if(isset($_GET['event'])) {
 		      			$genre = $f->getGenre()->getGenre();
 		      			echo "<tr id='event$id'><td>$genre</td><td><a href=index.php?video=".$id.">".$name."</a></td><td>";
 		      			?> <a href="?profile=<?php echo $thisUser->getNick(); ?>&vid=<?php echo $id;?>"> <img src='images/minus.png' id='del2<?php echo "$id" ?>' onmouseover='switch_hover(1, "del2<?php echo "$id" ?>");' onmouseout='switch_hover(0, "del2<?php echo "$id" ?>");'></a> <?php
-	      				
 		      			echo "</td></tr>";
 			      	}
 		      	}
@@ -133,7 +176,6 @@ if(isset($_GET['event'])) {
   <div id="profile_infos">
     <b>Friends</b><br>
     <?php 
-    	$friends = $thisUser->getFriends();
       if ($friends != NULL) {
 	    	foreach($friends as $f) {
 	    		$nick = $f->getNick();
@@ -159,6 +201,13 @@ if(isset($_GET['event'])) {
     ?>
   </div>
 </div>
+
+<?php 
+  	} else {
+  		echo "<a href='?profile={$thisUser->getNick()}&connect={$thisUser->getId()}'>connect</a><br>";
+  		echo "Not Available";  		
+  	}
+?>
 	
 		<!-- 
  			The divs for created_events and videos first invisible , if javascript is activated

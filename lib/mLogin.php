@@ -27,7 +27,6 @@
 			$u->setlastSignIn(date('Y-m-d H:i:s'));
 			return 1;
 		}
-		
 		return 0;
 	}
 

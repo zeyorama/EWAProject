@@ -24,6 +24,14 @@ function switch_hover(test, id) {
 	}
 }
 
+function switch_hover_edit(test, id) {
+	var elimg = document.getElementById(id);
+	if(elimg.src.match(/images\/edit.png/) && test) {
+		elimg.src = "images/edit_hover.png";
+	} else {
+		elimg.src = "images/edit.png";
+	}
+}
 
 
 
