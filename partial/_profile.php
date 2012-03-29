@@ -8,14 +8,30 @@ $id = unserialize($_SESSION['user'])->getId();
 
 if(isset($_GET['vid'])) {
 	$video = $_GET['vid'];
-	$db->prepare("DELETE FROM _user_video WHERE user_id = ? AND video_id = ?");
+	$db->prepare("DELETE FROM _user_video WHERE user_id = ? AND video_id = ?;");
 	$db->exe_prepare("ss", $id, $video);
 }
 
 if(isset($_GET['event'])) {
 	$video = $_GET['event'];
-	$db->prepare("DELETE FROM _event_video WHERE ue_id = ? AND video_id = ?");
+	$db->prepare("DELETE FROM _event_video WHERE ue_id = ? AND video_id = ?;");
 	$db->exe_prepare("ss", $id, $video);
+}
+
+if(isset($_GET['connect'])) {
+	if(signed_in()) {
+		$db->prepare("INSERT INTO _knowing (user_id1, user_id2) VALUES(?, ?);");
+		$db->exe_prepare("ss", $id, $thisUser->getId());
+	}
+}
+
+if(isset($_GET['unconnect'])) {
+	if(signed_in()) {
+		$db->prepare("DELETE FROM _knowing WHERE user_id1 = ? AND user_id2 = ?;");
+		$db->exe_prepare("ss", $id, $thisUser->getId());
+		$db->prepare("DELETE FROM _knowing WHERE user_id1 = ? AND user_id2 = ?;");
+		$db->exe_prepare("ss", $thisUser->getId(), $id);
+	}
 }
 
 ?>
@@ -28,12 +44,24 @@ if(isset($_GET['event'])) {
     } else {
       echo "{$thisUser->getNick()}s";
     }
-    	$friends = $thisUser->getFriends();
+    $friends = $thisUser->getFriends();
   ?> profile</h2>
   <?php 
-  	/*if(in_array($thisUser, $friends)) {
-  		echo "asdasd";
-  	}*/
+  
+  	$toogle = 0;
+  	
+  	if($friends != NULL) {
+	  	foreach($friends as $value) {
+	  		if(($id == $value->getId()) || ($thisUser->getId() == $id)) {
+	  			$toogle = 1;
+	  		}
+	  	}
+  	}
+  
+  	if($toogle == 1) {
+  		if(($thisUser->getId() != $id)) {
+  			echo "<a href='?profile={$thisUser->getNick()}&unconnect={$thisUser->getId()}'>Unconnect</a><br>";
+  		}
   ?>
   Bei Stromausfall ist die beste Gelegenheit mit Ihrem Föhn zu baden!
   <hr id="profile"><br>
@@ -164,6 +192,13 @@ if(isset($_GET['event'])) {
     ?>
   </div>
 </div>
+
+<?php 
+  	} else {
+  		echo "<a href='?profile={$thisUser->getNick()}&connect={$thisUser->getId()}'>connect</a><br>";
+  		echo "Not Available";  		
+  	}
+?>
 	
 		<!-- 
  			The divs for created_events and videos first invisible , if javascript is activated

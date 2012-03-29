@@ -1,3 +1,4 @@
+<script type="text/javascript" src="script/profile_drop_down.js"></script>
 <?php
 
 	global $user, $db;
@@ -48,6 +49,7 @@
 			  } else {
 				  echo "{$e->startDate()} Das Event hat schon begonnen spute dich. ;)";
 			  }
+			  echo "<br>";
 			  echo "<b>Creator: 
 </b>{$e->Owner()->getNick()}";
 			  echo "<br>";
@@ -70,8 +72,7 @@
 			  } else {
 				  echo "no Videos set";
 			  }
->>>>>>> e9f2a68b1078401f14770437872e20a08251cb73
-			
+			  
 			  echo "<br>";
 			  echo "<br>";
 			  echo "<b>Teilnehmer:</b><br>";
@@ -87,11 +88,12 @@
 	    ?>
 	     <table>
 	      <colgroup>
-	        <col>
-	        <col>
-	        <col>
-	        <col>
-	        <col>
+	        <col align="left">
+	        <col align="left">
+	        <col align="left">
+	        <col align="left">
+	        <col align="left">
+	        <col align="right">
 	      </colgroup>
 	      <tr>
 	        <th>Eventname</th>
@@ -99,13 +101,32 @@
 	        <th>Start date</th>
 	        <th>Publisher</th>
 	        <th>Count of Visitors</th>
+	        <th></th>
 	      </tr>
 	    <?php
 	    $db->prepare("SELECT * FROM _event;");
 		  $db->exe_prepare();
-		  while($e = $db->get_next_result()) {
-		    
+		  $e = array();
+		  while($es = $db->get_next_result("Event")) {
+		  	$e[] = $es;
 		  }
+	    foreach($e as $value) {
+	    	$sum = count($value->getAllVisitors());
+	      echo "<tr>
+	        <th>{$value->getName()}</th>
+	        <th>{$value->getLocation()}</th>
+	        <th>{$value->startDate()}</th>
+	        <th>{$value->Owner()->getNick()}</th>
+	        <th>$sum</th>
+	        <th>"; ?>
+	        	<a href="?events=<?php echo $value->getId(); ?>&add">
+	        		<img id ='image_cEvents_content<?php echo $value->getId() ?>' alt="" src="images/plus.png" onclick='switch_img("cEvents_content<?php echo $value->getId() ?>");' onmouseover='switch_hover(1, "image_cEvents_content<?php echo $value->getId() ?>");' onmouseout='switch_hover(0, "image_cEvents_content<?php echo $value->getId() ?>");'>
+	        	</a>
+	        <?php echo "
+	        </th>
+	      </tr>";
+	    }
+		  echo "</table>";
 	  }
 	}
 ?>
