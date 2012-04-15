@@ -46,6 +46,7 @@ if(isset($_GET['unconnect'])) {
     }
     $friends = $thisUser->getFriends();
   ?> profile</h2>
+  <b><?php echo "Gürtel: ".$thisUser->getBelt(); ?></b><br><br>
   <?php 
   
   	$toggle = 0;
@@ -98,17 +99,20 @@ if(isset($_GET['unconnect'])) {
 	      				$name = $f->getName();
 	      				$start = $f->startDate();
 	      				echo "<tr id='event$id'><td>$start</td><td><a href=index.php?events=".$id.">".$name."</a></td>";
-								?> 
+	      				
+	      				if($thisUser->getNick() == unserialize($_SESSION['user'])->getNick()) {
+	      				?> 
 								
 								<td>
-								<a href="?profile=<?php echo $thisUser->getNick(); ?>&event=<?php echo $id;?>"><img src='images/minus.png' id='del<?php echo "$id" ?>' onmouseover='switch_hover(1, "del<?php echo "$id" ?>");' onmouseout='switch_hover(0, "del<?php echo "$id" ?>");'> </a> 
+								<a href="?delete&events=<?php echo $id;?>"><img src='images/minus.png' id='del<?php echo "$id" ?>' onmouseover='switch_hover(1, "del<?php echo "$id" ?>");' onmouseout='switch_hover(0, "del<?php echo "$id" ?>");'> </a> 
 								</td>
 								
 								<td>
-								<a href="?profile=<?php echo $thisUser->getNick(); ?>&edit=<?php echo $id;?>"><img src='images/edit.png' id='edit<?php echo "$id" ?>' onmouseover='switch_hover_edit(1, "edit<?php echo "$id" ?>");' onmouseout='switch_hover_edit(0, "edit<?php echo "$id" ?>");'> </a> 
+								<a href="?edit_event=<?php echo $id;?>"><img src='images/edit.png' id='edit<?php echo "$id" ?>' onmouseover='switch_hover_edit(1, "edit<?php echo "$id" ?>");' onmouseout='switch_hover_edit(0, "edit<?php echo "$id" ?>");'> </a> 
 								</td>
 								
 								<?php
+	      				}
 	      				echo "</tr>";
 	      			}
 	      		}
@@ -154,6 +158,16 @@ if(isset($_GET['unconnect'])) {
 		      			$genre = $f->getGenre()->getGenre();
 		      			echo "<tr id='event$id'><td>$genre</td><td><a href=index.php?video=".$id.">".$name."</a></td><td>";
 		      			?> <a href="?profile=<?php echo $thisUser->getNick(); ?>&vid=<?php echo $id;?>"> <img src='images/minus.png' id='del2<?php echo "$id" ?>' onmouseover='switch_hover(1, "del2<?php echo "$id" ?>");' onmouseout='switch_hover(0, "del2<?php echo "$id" ?>");'></a> <?php
+		      			$db->query("SELECT * FROM _user_video WHERE video_id = $id AND user_id = {$thisUser->getId()};");
+		      			$uv = $db->get_next_result("UserVideo");
+		      			$sId = $uv->getSharedTo();
+		      			if($sId) {
+		      				$db->query("SELECT * FROM _user WHERE user_id = $sId;");
+		      				$sharedUser = $db->get_next_result("User");
+		      				echo "<a href='?profile={$sharedUser->getNick()}'>{$sharedUser->getNick()}</a>&nbsp;&nbsp;<a href='?share&to_unlock=$id'>U</a>";
+		      			} else {
+		      			echo "<a href='?share&to_share=$id'>Share</a>";
+		      			}
 		      			echo "</td></tr>";
 			      	}
 		      	}

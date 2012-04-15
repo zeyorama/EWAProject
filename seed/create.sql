@@ -58,6 +58,7 @@ uv_id int NOT NULL AUTO_INCREMENT,
 user_id int NOT NULL,
 video_id int NOT NULL,
 shared_to int,
+meta varchar(255),
 PRIMARY KEY (uv_id)
 );
 

@@ -87,6 +87,8 @@ open(_F, ">$cf");
   print(_F "include_once 'lib/cUser.php';\n");
   print(_F "include_once 'lib/cEvent.php';\n");
   print(_F "include_once 'lib/cVideo.php';\n");
+  print(_F "include_once 'lib/cUserVideo.php';\n");
+  print(_F "include_once 'lib/cUserEvent.php';\n");
   print(_F "include_once 'lib/mLogin.php';\n");
 
   print(_F "\$db = Database::instance();\n");

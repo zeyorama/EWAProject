@@ -111,14 +111,6 @@
 		
 		
 		/* (non-Javadoc)
-		 * @see i_user#getBelt
-		*/
-		public function getBelt() {
-			
-		}
-		
-		
-		/* (non-Javadoc)
 		 * @see i_user#lastSignIn
 		*/
 		public function lastSignIn() {
@@ -209,6 +201,37 @@
 					session_id = '{$this->session_id}', 
 					locked = {$this->locked} 
 				WHERE user_id = {$this->user_id};");
+		}
+		
+		/* (non-Javadoc)
+		 *@see i_user+getBelt
+		*/
+		public function getBelt() {
+			$vids = $this->getVideos();
+			$anz = count($vids);
+			if($anz > 500) {
+				return "Rot - Dvd-Nerd";
+			} else if($anz > 400) {
+				return "Rot-Weiß";
+			} else if($anz > 350) {
+				return "Braun";
+			} else if($anz > 300) {
+				return "Blau";
+			} else if($anz > 250) {
+				return "Grün";
+			} else if($anz > 200) {
+				return "Orange-Grün";
+			} else if($anz > 150) {
+				return "Orange";
+			} else if($anz > 100) {
+				return "Gelb-Orange";
+			} else if($anz > 50) {
+				return "Gelb";
+			} else if($anz > 25) {
+				return "Weiß-Gelb";
+			} else {
+				return "Weiß";
+			}
 		}
 	}
 ?>

@@ -70,13 +70,21 @@ class Event implements i_event {
 	  $videos = Array();
 	  
 	  global $db;
-	  $db->query("SELECT * FROM _video WHERE _video.video_id IN (
-	  		SELECT _event_video.video_id FROM _event_video WHERE ue_id = {$this->event_id}
-	  );");
 	  
-	  while($video = $db->get_next_result("Video")) {
-	  	$videos[] = $video;
-	  }
+	  $videos = array();
+  	
+	  $db->query("SELECT * FROM _user_event WHERE event_id = {$this->event_id}");
+  	$ues = array();
+  	while($ue = $db->get_next_result("UserEvent")) {
+  		$ues[] = $ue->getUeId();
+  	}
+		foreach($ues as $ue) {
+			$db->query("SELECT * FROM _video WHERE _video.video_id IN (
+						SELECT _event_video.video_id FROM _event_video WHERE _event_video.ue_id = $ue);");
+			while($vid = $db->get_next_result("Video")) {
+				$videos[] = $vid;
+			}
+		}
 	  
 	  if (!count($videos)) { return NULL; }
 	  return $videos;

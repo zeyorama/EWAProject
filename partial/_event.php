@@ -28,13 +28,17 @@
 				  }
 			  } else if(isset($_GET['add'])) {
 				  if(!$trigger) {
-					  $db->prepare("INSERt INTO _user_event (event_id, user_id) VALUES(?, ?);");
+					  $db->prepare("INSERT INTO _user_event (event_id, user_id) VALUES(?, ?);");
 					  $db->exe_prepare("ii", $id, $user->getId());
 					  $trigger = !$trigger;
 				  }
+			  } else if(isset($_GET['delete'])) {
+			  	$db->prepare("DELETE FROM _event WHERE event_id = ? AND owner_user_id = ?;");
+			  	$db->exe_prepare("ss", $id, $user->getId());
+  				header("Location: index.php?profile={$user->getNick()}");
 			  }
 			  if($trigger) {
-				  echo "<a href='index.php?events=$id&del'>Cancel</a><br>";
+				  echo "<a href='index.php?events=$id&del'>Cancel</a> <a href='index.php?add_video_to_event=$id'>Videos Setzen</a> <br>";
 			  } else {
 				  echo "<a href='index.php?events=$id&add'>Participate</a><br>";
 			  }
@@ -42,7 +46,9 @@
 		
 			$dif = (strtotime($e->startDate()) - strtotime(date('Y-m-d H:i:s'))) / 3600;
 			  echo "<b>Beginn: </b>";
-			  if($dif > 60) {
+			  if($dif > 24) {
+				  echo "{$e->startDate()} in ". (int)($dif/24) . " Tage";
+			  } else if($dif > 1) {
 				  echo "{$e->startDate()} in ". (int)$dif . " Stunden";
 			  } else if($dif > 0) { 
 				  echo "{$e->startDate()} in ". (int)($dif*60) . " Minuten";
@@ -67,7 +73,7 @@
 			   */
 			  if($v = $e->getVideos()) {
 				  foreach ($v as $key => $value) {
-					  echo $value->getName();
+					  echo $value->getTitle()."<br>";
 				  }
 			  } else {
 				  echo "no Videos set";

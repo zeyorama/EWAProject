@@ -42,8 +42,14 @@
             } else if (isset($_GET['profiles'])) {
               include 'partial/_profiles.php';
               
+            } else if (isset($_GET['add_video_to_event'])) {
+              include 'partial/_add_video_to_event.php';
+            
             } else if (isset($_GET['new_event'])) {
               include 'partial/_new_event.php';
+              
+            } else if (isset($_GET['edit_event'])) {
+              include 'partial/_edit_event.php';
               
             } else if (isset($_GET['new_message'])) {
               include 'partial/_new_message.php';
@@ -59,6 +65,9 @@
             
             } else if (isset($_GET['add_video'])) {
               include 'partial/_add_video.php';
+
+            } else if (isset($_GET['share'])) {
+              include 'partial/_share.php';
 
             } else {
               include 'partial/_index.php';
