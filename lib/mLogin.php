@@ -46,15 +46,16 @@
 		if(isset($_SESSION['user'])) {
 			
 			global $db;
-			$db->prepare("SELECT * FROM _user WHERE session_id = ? AND last_signin	< current_timestamp + 60*15*1000 LIMIT 1;");
+			$db->prepare("SELECT * FROM _user WHERE session_id = ? AND last_signin	< current_timestamp + 1500 LIMIT 1;");
 			$db->exe_prepare("s", session_id());
 			$trigger = 0;
 			
-			while($u = $db->get_next_result("User")) {
-				$trigger = 1;
-			}
+			$u = $db->get_next_result("User");
+			while($db->get_next_result("User"));
 			
-			if($trigger) {
+			if($u != null) {
+				$db->prepare("UPDATE _user SET last_signin = current_timestamp WHERE session_id = ? AND user_id = ?");
+				$db->exe_prepare("ss", session_id(), $u->getId());
 				return true;
 			}
 			

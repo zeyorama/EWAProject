@@ -1,7 +1,14 @@
 <?php
 global $db;
-$db->query("SELECT * FROM _user WHERE nick='{$_GET['profile']}' LIMIT 1;");
+
+if(!function_exists("signed_in")) {
+	die("Unavailable Site");
+}
+
+$db->prepare("SELECT * FROM _user WHERE nick=? LIMIT 1;");
+$db->exe_prepare("s", $_GET['profile']);
 $thisUser = $db->get_next_result('User');
+while($db->get_next_result("User"));
 
 $nick = unserialize($_SESSION['user'])->getNick();
 $id = unserialize($_SESSION['user'])->getId();

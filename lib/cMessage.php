@@ -68,7 +68,9 @@
 		public function getFromUser() {
 			global $db;
 			$db->query("SELECT * FROM _user WHERE user_id = {$this->from_user}");
-			return $db->get_next_result("User");
+			$tmp = $db->get_next_result("User");
+			while($db->get_next_result("User"));
+			return $tmp;
 		}
 		
 		
@@ -79,7 +81,9 @@
 		public function getToUser() {
 			global $db;
 			$db->query("SELECT * FROM _user WHERE user_id = {$this->to_user}");
-			return $db->get_next_result("User");
+			$tmp = $db->get_next_result("User");
+			while($db->get_next_result("User"));
+			return $tmp;
 		}
 		
 	}

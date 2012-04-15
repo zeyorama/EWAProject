@@ -1,5 +1,11 @@
 <?php
   global $db;
+  
+  if(!function_exists("signed_in")) {
+  	die("Unavailable Site");
+  }
+  
+  
   $db->query("SELECT * FROM _user ORDER BY nick;");
  
   $users = array();

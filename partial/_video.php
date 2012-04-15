@@ -1,6 +1,11 @@
 <?php
 	global $db, $user;
 	
+	if(!function_exists("signed_in")) {
+		die("Unavailable Site");
+	}
+	
+	
 	if (isset($_GET['video'])) {
 		if(isset($_GET['edit'])) {
 			if(isset($_POST['meta'])) {
@@ -9,7 +14,8 @@
 		
 				header("Location: index.php?video={$_GET['video']}");
 			}
-			$db->query("SELECT * FROM _user_video WHERE user_id = {$user->getId()} AND video_id = {$_GET['video']}");
+			$db->prepare("SELECT * FROM _user_video WHERE user_id = ? AND video_id = ?");
+			$db->exe_prepare("ss", $user->getId(), $_GET['video']);
 			$user_video = $db->get_next_result("UserVideo");
 			echo "<h2>Edit Meta Text For Video</h2>";
 			echo "<form action='?video={$_GET['video']}&edit' method='post'>";
@@ -44,7 +50,8 @@
 				$vidids[] = $vid2->getId();
 			}
 			if(in_array($id, $vidids)) {
-				$db->query("SELECT * FROM _user_video WHERE user_id = {$user->getId()} AND video_id = {$vid->getId()}");
+				$db->prepare("SELECT * FROM _user_video WHERE user_id = ? AND video_id = ?");
+				$db->exe_prepare("ss", $user->getId(), $vid->getId());
 				$uv = $db->get_next_result("UserVideo");
 				echo "<tr><th align='left'>Meta:</th><td align='right'>{$uv->getMeta()} <a href='?video={$vid->getId()}&edit'>Edit</a></td></tr>";
 			}

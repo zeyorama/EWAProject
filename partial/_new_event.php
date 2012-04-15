@@ -1,3 +1,10 @@
+<?php 
+
+if(!function_exists("signed_in")) {
+	die("Unavailable Site");
+}
+
+?>
 <div id="new_event">
 
 <form action="new_event.php" method="POST">

@@ -1,4 +1,9 @@
 <?php 
+	
+	if(!function_exists("signed_in")) {
+		die("Unavailable Site");
+	}
+	
 	if(isset($_GET['error'])) {
 		echo "Error couldn't send pn";
 	}

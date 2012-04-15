@@ -2,7 +2,11 @@
 <?php
 
 	global $user, $db;
-
+	
+	if(!function_exists("signed_in")) {
+		die("Unavailable Site");
+	}
+	
 	if(isset($_GET['events'])) {
 	  if($_GET['events'] != "") {
 		  $id = $_GET['events'];
@@ -35,6 +39,18 @@
 			  } else if(isset($_GET['delete'])) {
 			  	$db->prepare("DELETE FROM _event WHERE event_id = ? AND owner_user_id = ?;");
 			  	$db->exe_prepare("ss", $id, $user->getId());
+			  	$db->prepare("SELECT * FROM _user_event WHERE event_id = ?");
+			  	$db->exe_prepare("s", $id);
+			  	$ueIds = array();
+			  	while($tmp = $db->get_next_result("UserEvent")) {
+			  		$ueIds[] = $tmp->getUeId();
+			  	}
+			  	foreach($ueIds as $ueId) {
+			  		$db->prepare("DELETE FROM _event_video WHERE ue_id = ?");
+			  		$db->exe_prepare("s", $ueId);
+			  	}
+			  	$db->prepare("DELETE FROM _user_event WHERE event_id = ?");
+			  	$db->exe_prepare("s", $id);
   				header("Location: index.php?profile={$user->getNick()}");
 			  }
 			  if($trigger) {
@@ -132,7 +148,10 @@
 	        </th>
 	      </tr>";
 	    }
-		  echo "</table>";
+	    if(count($e) == 0) {
+	    	echo "<tr><th>Keine Events gelistet</th></tr>";
+	    }
 	  }
 	}
 ?>
+</table>

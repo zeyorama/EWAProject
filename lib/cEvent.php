@@ -110,7 +110,9 @@ class Event implements i_event {
 	public function Owner() {
 	  global $db;
 	  $db->query("SELECT * FROM _user WHERE user_id = {$this->owner_user_id};");
-	  return $db->get_next_result("User");
+	  $tmp = $db->get_next_result("User");
+	  while($db->get_next_result("User"));
+	  return $tmp;
 	}
 	
 	/* (non-Javadoc)

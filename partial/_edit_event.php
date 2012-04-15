@@ -2,8 +2,15 @@
 
 <?php 
 	global $db, $user;
-	$db->query("SELECT * FROM _event WHERE event_id = {$_GET['edit_event']} AND owner_user_id = {$user->getId()}");
+	
+	if(!function_exists("signed_in")) {
+		die("Unavailable Site");
+	}
+
+	$db->prepare("SELECT * FROM _event WHERE event_id = ? AND owner_user_id = ?");
+	$db->exe_prepare("ss", $_GET['edit_event'], $user->getId());
 	$event = $db->get_next_result("Event");
+	while($db->get_next_result("Event"));
 ?>
 
 <form action="edit_event.php" method="POST">

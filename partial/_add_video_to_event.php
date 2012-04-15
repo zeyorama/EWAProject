@@ -1,6 +1,10 @@
 <?php 
 	global $db, $user;
 	
+	if(!function_exists("signed_in")) {
+		die("Unavailable Site");
+	}
+	
 	if(isset($_GET['add_video_to_event'])) {
 		$db->prepare("SELECT * FROM _event WHERE event_id = ?;");
 		$db->exe_prepare("s", $_GET['add_video_to_event']);
@@ -16,12 +20,14 @@
 			
 	if(isset($_POST['mult_vid'])) {
 		$select = $_POST['mult_vid'];
+		
+		$db->query("DELETE FROM _event_video WHERE ue_id = {$ueid->getUeId()}");
 		foreach ($select as $val) {
-			$db->query("DELETE FROM _event_video WHERE ue_id = {$ueid->getUeId()}");
 			$db->prepare("INSERT INTO _event_video (ue_id, video_id) VALUES(?, ?);");
 			$db->exe_prepare("ss", $ueid->getUeId(), $val);
 		}
-  	header("Location: index.php?profile={$user->getNick()}");
+  	
+		header("Location: index.php?profile={$user->getNick()}");
 	} else {
 ?>
 

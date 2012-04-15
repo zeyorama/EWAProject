@@ -2,6 +2,11 @@
 
   include 'epic.php';
   
+  if(!function_exists("signed_in")) {
+  	die("Unavailable Site");
+  }
+  
+  
   $name = $_POST['name'];
   $description = $_POST['description'];
   $location = $_POST['location'];

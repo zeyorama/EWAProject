@@ -1,6 +1,10 @@
 <?php 
 			global $db, $user;
 			
+			if(!function_exists("signed_in")) {
+				die("Unavailable Site");
+			}
+			
 			if(isset($_POST['mult_vid'])) {
 				$select = $_POST['mult_vid'];
 				foreach ($select as $val) {
@@ -8,6 +12,7 @@
 					$db->exe_prepare("ss", $user->getId(), $val);
 				}
 		  	header("Location: index.php?profile={$user->getNick()}");
+			
 			} else {
 ?>
 

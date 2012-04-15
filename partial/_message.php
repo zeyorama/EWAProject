@@ -2,6 +2,10 @@
 <?php
 	global $db, $user;
 	
+	if(!function_exists("signed_in")) {
+		die("Unavailable Site");
+	}
+	
 	if (isset($_GET['show'])) {
 		$db->prepare("SELECT * FROM _pn WHERE pn_id = ? AND to_user = ?;");
 		$db->exe_prepare("ii", $_GET['show'], $user->getId());

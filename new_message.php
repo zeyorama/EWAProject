@@ -2,6 +2,11 @@
 
   include 'epic.php';
   
+  if(!function_exists("signed_in")) {
+  	die("Unavailable Site");
+  }
+  
+  
   global $db, $user;
   
   $to = $_POST['to'];
